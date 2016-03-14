@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plot_id: 
+  number: MyString
+  state: MyString
+
+two:
+  plot_id: 
+  number: MyString
+  state: MyString

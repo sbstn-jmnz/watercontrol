@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
+
   constraints subdomain: 'api' do
-    namespace :mobilapp do
-      resources :
-      resources :condos, only: [:index, :show]
+
+    namespace :mobilapp, path: '/mobileapp' do
     end
-    namespace :webapp do
-      resources :condos, except: :destroy
+
+    namespace :api, path: '/webapp' do
+      scope module: 'webapp' do
+        resources :condos, only: [:index, :show]
+        resources :plots
+      end
     end
+
   end
 end
