@@ -3,6 +3,9 @@ gem 'rails', '4.2.5.2'
 gem 'rails-api'
 gem 'pg'
 
+group :development, :test do
+    
+end
 
 
 # To use ActiveModel has_secure_password
