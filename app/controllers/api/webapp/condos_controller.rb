@@ -1,5 +1,5 @@
 module Api::Webapp
-  class CondosController < ApplicationController
+  class CondosController < Api::ApplicationController
       def index
         condos = Condo.all
         render json: condos, status: 200

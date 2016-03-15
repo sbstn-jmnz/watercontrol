@@ -7,7 +7,7 @@ class ListinCondosTest < ActionDispatch::IntegrationTest
     get '/webapp/condos'
     assert_equal 200, response.status
     refute_empty response.body
-    assert_equal Condo.all.count, responde.body.count
+    assert_equal Condo.all.count, response.body.length
   end
 
 end
