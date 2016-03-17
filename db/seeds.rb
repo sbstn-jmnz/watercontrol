@@ -3,5 +3,16 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+    Plot.destroy_all
+    Condo.destroy_all
+
+    Condo.create([{ name: 'Rio Mar', description: 'Primer condo' },
+                  { name: 'Campo Mar',description: 'Primer condo' }])
+
+    for n in 1..10
+        Plot.create(plot_number: n, condo_id: Condo.first.id)
+    end
+
+    for n in 1..10
+        Plot.create(plot_number: n+10, condo_id: Condo.last.id)
+    end

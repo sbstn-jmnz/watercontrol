@@ -3,7 +3,7 @@ class Plot < ActiveRecord::Base
   belongs_to :owner
   has_many :meters, dependent: :destroy
 
-  validates :number, presence: true
+  validates :plot_number, presence: true
   validates_inclusion_of :state, :in => PLOT_STATES, :allow_nil => true
   validates_associated :condo
   validates_associated :owner
