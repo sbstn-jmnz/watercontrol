@@ -3,13 +3,13 @@ module Api::Webapp
 
       def index
           condos = Condo.all
-          render json: condos, status: 200
+          render json: condos, status: 200, serializer: CondoSerializer
       end
 
       def show
         if params[:id]
-          condo = Condo.find(params[:id]).with_plots
-          render json: condo, status: 200
+          condo = Condo.find(params[:id])
+          render json: condo, status: 200, serializer: CondoSerializer
         end
       end
     end

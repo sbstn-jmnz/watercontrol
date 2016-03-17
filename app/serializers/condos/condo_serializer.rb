@@ -1,3 +1,5 @@
 class CondoSerializer < ActiveModel::Serializer
-  attributes *Condo.column_names
+  attributes :id, :name, :description
+
+  has_many :plots
 end

@@ -3,7 +3,7 @@ class Condo < ActiveRecord::Base
   validates :name, :description, presence: true
 
   def with_plots
-    include plots
+    plots
   end
 
 end
