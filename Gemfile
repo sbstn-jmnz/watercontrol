@@ -4,9 +4,10 @@ gem 'rails-api'
 gem 'pg'
 
 group :development, :test do
-    
+
 end
 
+gem 'active_model_serializers'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
