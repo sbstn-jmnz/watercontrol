@@ -3,7 +3,11 @@ class Condo < ActiveRecord::Base
   validates :name, :description, presence: true
 
   def with_plots
-    include plots
+    Condo.includes :plots
+  end
+
+  def active_model_serializer
+    Condos::CondoSerializer
   end
 
 end
