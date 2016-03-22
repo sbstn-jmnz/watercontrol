@@ -14,4 +14,7 @@ module Watercontrol
       'Access-Control-Request-Method' => '*'})
 
   end
+  Rails.application.routes.default_url_options = {
+    host: 'example.com'
+}
 end

@@ -7,7 +7,7 @@ group :development, :test do
     gem "factory_girl_rails", "~> 4.0"
 end
 
-gem 'active_model_serializers'
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
