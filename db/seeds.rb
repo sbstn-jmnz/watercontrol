@@ -3,16 +3,52 @@
 #
 # Examples:
 #
+    Sector.destroy_all
+    User.destroy_all
     Plot.destroy_all
     Condo.destroy_all
+    Role.destroy_all
+
 
     Condo.create([{ name: 'Rio Mar', description: 'Primer condo' },
                   { name: 'Campo Mar',description: 'Primer condo' }])
 
+    Role.create([{ name: 'Admin', },
+                 { name: 'Meter'},
+                 { name: 'SuperAdmin'}])
+
+    Sector.create([{ name: 'Las Palmas', condo_id: Condo.first.id },
+                 { name: 'Las Liebres', condo_id: Condo.first.id },
+                 { name: 'Los Cipres', condo_id: Condo.last.id },
+                 { name: 'El Bosque', condo_id: Condo.last.id }])
+
+    User.create([{ name: 'Seba', rut: '15.316.349-9', role_id: Role.first.id },
+                 { name: 'Gonzalo',rut: '16.299.222-8',role_id: Role.last.id },
+                 { name: 'Jenny',rut: '1.111.111-1',role_id: Role.where(name: "Meter").take.id }])
+
+#Plots, Meters and Measures for Condo Rio Mar
     for n in 1..10
-        Plot.create(plot_number: n, condo_id: Condo.first.id)
+      if n % 2 == 0
+        plot = Plot.create(plot_number: n, condo_id: Condo.first.id, state: "sold", sector_id: Sector.where(condo_id: Condo.first.id).first.id)
+        Meter.create(number: (n+100).to_s, state: "active", plot_id: plot.id)
+      else
+        plot = Plot.create(plot_number: n, condo_id: Condo.first.id, state: "available", sector_id: Sector.where(condo_id: Condo.first.id).last.id)
+        Meter.create(number: (n+100).to_s, state: "inactive", plot_id: plot.id)
+      end
+    end
+#Plots, Meters and Measures for Condo Campo Mar
+    for n in 1..10
+      if n % 2 == 0
+        plot = Plot.create(plot_number: n+10, condo_id: Condo.last.id, state: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
+        Meter.create(number: (n+100).to_s, state: "active", plot_id: plot.id)
+      else
+        plot = Plot.create(plot_number: n+10, condo_id: Condo.last.id, state: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
+        Meter.create(number: (n+100).to_s, state: "active", plot_id: plot.id)
+      end
     end
 
-    for n in 1..10
-        Plot.create(plot_number: n+10, condo_id: Condo.last.id)
+    Meter.all.each do |meter|
+      for n in 1..10
+      Measure.create( comment: 'blah blah', meter_id: meter.id, state: MEASURES_STATES[n], user_id: User.last.id, value: n*100 )
+      end
     end
