@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316195716) do
+ActiveRecord::Schema.define(version: 20160322164747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,9 +28,13 @@ ActiveRecord::Schema.define(version: 20160316195716) do
     t.integer  "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.text     "comment"
+    t.string   "state"
   end
 
   add_index "measures", ["meter_id"], name: "index_measures_on_meter_id", using: :btree
+  add_index "measures", ["user_id"], name: "index_measures_on_user_id", using: :btree
 
   create_table "meters", force: :cascade do |t|
     t.integer  "plot_id"
@@ -56,13 +60,40 @@ ActiveRecord::Schema.define(version: 20160316195716) do
     t.datetime "updated_at",  null: false
     t.integer  "owner_id"
     t.string   "state"
+    t.integer  "sector_id"
   end
 
   add_index "plots", ["condo_id"], name: "index_plots_on_condo_id", using: :btree
   add_index "plots", ["owner_id"], name: "index_plots_on_owner_id", using: :btree
+  add_index "plots", ["sector_id"], name: "index_plots_on_sector_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sectors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "rut"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "role_id"
+  end
+
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
   add_foreign_key "measures", "meters"
+  add_foreign_key "measures", "users"
   add_foreign_key "meters", "plots"
   add_foreign_key "plots", "condos"
   add_foreign_key "plots", "owners"
+  add_foreign_key "plots", "sectors"
+  add_foreign_key "users", "roles"
 end
