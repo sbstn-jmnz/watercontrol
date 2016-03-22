@@ -11,6 +11,7 @@ Rails.application.routes.draw do
           resources :sectors, only: [:index, :show]
         end
         resources :plots
+        resources :users
       end
     end
 
