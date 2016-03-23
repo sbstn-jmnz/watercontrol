@@ -29,20 +29,20 @@
 #Plots, Meters and Measures for Condo Rio Mar
     for n in 1..10
       if n % 2 == 0
-        plot = Plot.create(plot_number: n, condo_id: Condo.first.id, state: "sold", sector_id: Sector.where(condo_id: Condo.first.id).first.id)
+        plot = Plot.create(plot_number: n, state: "sold", sector_id: Sector.where(condo_id: Condo.first.id).first.id)
         Meter.create(number: (n+100).to_s, state: "active", plot_id: plot.id)
       else
-        plot = Plot.create(plot_number: n, condo_id: Condo.first.id, state: "available", sector_id: Sector.where(condo_id: Condo.first.id).last.id)
+        plot = Plot.create(plot_number: n, state: "available", sector_id: Sector.where(condo_id: Condo.first.id).last.id)
         Meter.create(number: (n+100).to_s, state: "inactive", plot_id: plot.id)
       end
     end
 #Plots, Meters and Measures for Condo Campo Mar
     for n in 1..10
       if n % 2 == 0
-        plot = Plot.create(plot_number: n+10, condo_id: Condo.last.id, state: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
+        plot = Plot.create(plot_number: n+10, state: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
         Meter.create(number: (n+100).to_s, state: "active", plot_id: plot.id)
       else
-        plot = Plot.create(plot_number: n+10, condo_id: Condo.last.id, state: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
+        plot = Plot.create(plot_number: n+10, state: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
         Meter.create(number: (n+100).to_s, state: "active", plot_id: plot.id)
       end
     end
