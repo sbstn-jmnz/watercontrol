@@ -6,6 +6,8 @@ gem 'pg'
 group :development, :test do
     gem "factory_girl_rails", "~> 4.0"
     gem "rails-erd"
+    gem "byebug"
+
 end
 
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
