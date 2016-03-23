@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322165846) do
+ActiveRecord::Schema.define(version: 20160323170737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 20160322165846) do
   end
 
   create_table "plots", force: :cascade do |t|
-    t.integer  "condo_id"
     t.string   "plot_number"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -63,7 +62,6 @@ ActiveRecord::Schema.define(version: 20160322165846) do
     t.integer  "sector_id"
   end
 
-  add_index "plots", ["condo_id"], name: "index_plots_on_condo_id", using: :btree
   add_index "plots", ["owner_id"], name: "index_plots_on_owner_id", using: :btree
   add_index "plots", ["sector_id"], name: "index_plots_on_sector_id", using: :btree
 
@@ -95,7 +93,6 @@ ActiveRecord::Schema.define(version: 20160322165846) do
   add_foreign_key "measures", "meters"
   add_foreign_key "measures", "users"
   add_foreign_key "meters", "plots"
-  add_foreign_key "plots", "condos"
   add_foreign_key "plots", "owners"
   add_foreign_key "plots", "sectors"
   add_foreign_key "sectors", "condos"

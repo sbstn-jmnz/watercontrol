@@ -7,11 +7,8 @@ class ListingCondosTest < ActionDispatch::IntegrationTest
 
   test 'Retorna una lista todos los condominios' do
     get '/webapp/condos'
-
     assert_equal 200, response.status
-
     refute_empty response.body
-
     assert_equal Condo.count, json(response.body).count
 
   end

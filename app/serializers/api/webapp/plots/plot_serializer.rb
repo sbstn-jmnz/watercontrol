@@ -1,9 +1,7 @@
-
 module Api::Webapp::Plots
-class PlotSerializer < ActiveModel::Serializer
-  attributes :id, :plot_number
-  belongs_to :condo_id
-  has_many :meters
-
+  class PlotSerializer < ActiveModel::Serializer
+    attributes :id, :plot_number
+    belongs_to :sector_id
+    has_many :meters, serializer: Meters::MeterSerializer
   end
 end

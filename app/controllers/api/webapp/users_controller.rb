@@ -17,7 +17,7 @@ module Api::Webapp
 
     def index
       users = User.all
-      render json: users, status: 200
+      render json: users, status: 200, root: false
     end
 
   private

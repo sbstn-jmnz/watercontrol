@@ -1,3 +1,10 @@
-class MeasureSerializer < ActiveModel::Serializer
-  attributes *Measure.column_names
+module Api::Webapp::Measures
+  class MeasureSerializer < ActiveModel::Serializer
+    attributes :id, :value, :state, :comment, :user
+    belongs_to :meter_id
+
+    def user
+      User.find(object.user_id)
+    end
+  end
 end
