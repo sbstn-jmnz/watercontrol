@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   constraints subdomain: 'api' do
 
     namespace :mobileapp, path: '/mobileapp' do
+      
     end
 
     namespace :api, path: '/webapp' do
