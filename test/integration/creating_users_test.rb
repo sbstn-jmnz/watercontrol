@@ -22,5 +22,10 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
       assert_equal User.count, json(response.body).count
     end
 
+  test 'Retorna un usuario en particular con todas sus parcelas' do
+       user = FactoryGirl::create :user
+       get "/webapp/users/#{user.id}"
+       assert_equal 200, response.status
+  end
 
 end

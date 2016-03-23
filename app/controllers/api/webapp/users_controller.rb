@@ -9,6 +9,10 @@ module Api::Webapp
     end
 
     def show
+      if params[:id]
+        user = User.find(params[:id])
+        render json: user, status: 200, root: false
+      end
     end
 
     def index
@@ -19,7 +23,7 @@ module Api::Webapp
   private
 
       def user_params
-        params.require(:user). permit(:name, :rut)
+        params.permit(:name, :rut)
       end
 
     end
