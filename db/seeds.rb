@@ -26,23 +26,32 @@
                  { name: 'Gonzalo',rut: '16.299.222-8',role_id: Role.last.id },
                  { name: 'Jenny',rut: '1.111.111-1',role_id: Role.where(name: "Meter").take.id }])
 
+    Owner.create([{ name: 'Seba', rut: '15.316.349-9' },
+                 { name: 'Gonzalo',rut: '16.299.222-8'},
+                 { name: 'Jenny',rut: '1.111.111-1' }])
+
+
 #Plots, Meters and Measures for Condo Rio Mar
     for n in 1..10
       if n % 2 == 0
-        plot = Plot.create(plot_number: n, status: "sold", sector_id: Sector.where(condo_id: Condo.first.id).first.id)
+        plot = Plot.create(plot_number: n, status: "sold", sector_id: Sector.where(condo_id: Condo.first.id).first.id,
+        owner_id: Owner.order("RANDOM()").first.id)
         Meter.create(number: (n+100).to_s, status: "active", plot_id: plot.id)
       else
-        plot = Plot.create(plot_number: n, status: "available", sector_id: Sector.where(condo_id: Condo.first.id).last.id)
+        plot = Plot.create(plot_number: n, status: "available", sector_id: Sector.where(condo_id: Condo.first.id).last.id,
+        owner_id: Owner.order("RANDOM()").first.id)
         Meter.create(number: (n+100).to_s, status: "inactive", plot_id: plot.id)
       end
     end
 #Plots, Meters and Measures for Condo Campo Mar
     for n in 1..10
       if n % 2 == 0
-        plot = Plot.create(plot_number: n+10, status: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
+        plot = Plot.create(plot_number: n+10, status: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id,
+        owner_id: Owner.order("RANDOM()").first.id)
         Meter.create(number: (n+100).to_s, status: "active", plot_id: plot.id)
       else
-        plot = Plot.create(plot_number: n+10, status: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
+        plot = Plot.create(plot_number: n+10, status: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id,
+        owner_id: Owner.order("RANDOM()").first.id)
         Meter.create(number: (n+100).to_s, status: "active", plot_id: plot.id)
       end
     end

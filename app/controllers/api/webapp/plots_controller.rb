@@ -8,7 +8,7 @@ module Api::Webapp
       def show
         if params[:id]
           plot = Plot.find(params[:id])
-          render json: plot, status: 200
+          render json: plot, status: 200, serializer: Plots::PlotSerializer, root: false
         end
       end
 
