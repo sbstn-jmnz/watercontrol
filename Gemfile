@@ -12,3 +12,4 @@ group :development, :test do
 end
 
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
+gem 'rack-cors', :require => 'rack/cors'
