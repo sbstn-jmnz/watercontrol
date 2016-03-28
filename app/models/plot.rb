@@ -5,18 +5,18 @@ class Plot < ActiveRecord::Base
 
   has_many :meters, dependent: :destroy
   validates :plot_number, presence: true
-  validates_inclusion_of :state, :in => PLOT_STATES, :allow_nil => true
+  validates_inclusion_of :status, :in => PLOT_STATUS, :allow_nil => true
   validates_associated :sector
   #validates_associated :owner
 
 
-  PLOT_STATES.each do |state|
-    define_method("#{state}?") do
-      self.state == state
+  PLOT_STATUS.each do |status|
+    define_method("#{status}?") do
+      self.status == status
     end
 
-    define_method("#{state}!") do
-      self.update_attribute(:state, state)
+    define_method("#{status}!") do
+      self.update_attribute(:status, status)
     end
   end
 end

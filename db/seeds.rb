@@ -29,26 +29,26 @@
 #Plots, Meters and Measures for Condo Rio Mar
     for n in 1..10
       if n % 2 == 0
-        plot = Plot.create(plot_number: n, state: "sold", sector_id: Sector.where(condo_id: Condo.first.id).first.id)
-        Meter.create(number: (n+100).to_s, state: "active", plot_id: plot.id)
+        plot = Plot.create(plot_number: n, status: "sold", sector_id: Sector.where(condo_id: Condo.first.id).first.id)
+        Meter.create(number: (n+100).to_s, status: "active", plot_id: plot.id)
       else
-        plot = Plot.create(plot_number: n, state: "available", sector_id: Sector.where(condo_id: Condo.first.id).last.id)
-        Meter.create(number: (n+100).to_s, state: "inactive", plot_id: plot.id)
+        plot = Plot.create(plot_number: n, status: "available", sector_id: Sector.where(condo_id: Condo.first.id).last.id)
+        Meter.create(number: (n+100).to_s, status: "inactive", plot_id: plot.id)
       end
     end
 #Plots, Meters and Measures for Condo Campo Mar
     for n in 1..10
       if n % 2 == 0
-        plot = Plot.create(plot_number: n+10, state: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
-        Meter.create(number: (n+100).to_s, state: "active", plot_id: plot.id)
+        plot = Plot.create(plot_number: n+10, status: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
+        Meter.create(number: (n+100).to_s, status: "active", plot_id: plot.id)
       else
-        plot = Plot.create(plot_number: n+10, state: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
-        Meter.create(number: (n+100).to_s, state: "active", plot_id: plot.id)
+        plot = Plot.create(plot_number: n+10, status: "sold", sector_id: Sector.where(condo_id: Condo.last.id).first.id)
+        Meter.create(number: (n+100).to_s, status: "active", plot_id: plot.id)
       end
     end
 
     Meter.all.each do |meter|
       for n in 1..10
-      Measure.create( comment: 'blah blah', meter_id: meter.id, state: MEASURES_STATES[n], user_id: User.last.id, value: n*100 )
+      Measure.create( comment: 'blah blah', meter_id: meter.id, status: MEASURES_STATUS[n], user_id: User.last.id, value: n*100 )
       end
     end

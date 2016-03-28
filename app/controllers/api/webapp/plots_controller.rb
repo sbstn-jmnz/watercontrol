@@ -4,5 +4,13 @@ module Api::Webapp
         plots = Plot.all
         render json: plots, status: 200, root: false
       end
-    end
+
+      def show
+        if params[:id]
+          plot = Plot.find(params[:id])
+          render json: plot, status: 200
+        end
+      end
+
+  end
 end

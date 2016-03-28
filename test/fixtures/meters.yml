@@ -3,9 +3,9 @@
 one:
   plot_id: 
   number: MyString
-  state: MyString
+  status: MyString
 
 two:
   plot_id: 
   number: MyString
-  state: MyString
+  status: MyString

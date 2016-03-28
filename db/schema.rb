@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160323170737) do
     t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.text     "comment"
-    t.string   "state"
+    t.string   "status"
   end
 
   add_index "measures", ["meter_id"], name: "index_measures_on_meter_id", using: :btree
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160323170737) do
   create_table "meters", force: :cascade do |t|
     t.integer  "plot_id"
     t.string   "number"
-    t.string   "state"
+    t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160323170737) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "owner_id"
-    t.string   "state"
+    t.string   "status"
     t.integer  "sector_id"
   end
 

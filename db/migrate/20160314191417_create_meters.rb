@@ -3,7 +3,7 @@ class CreateMeters < ActiveRecord::Migration
     create_table :meters do |t|
       t.references :plot, index: true, foreign_key: true
       t.string :number
-      t.string :state
+      t.string :status
 
       t.timestamps null: false
     end

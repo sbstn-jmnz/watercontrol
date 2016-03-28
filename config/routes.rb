@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         resources :condos, only: [:index, :show] do
           resources :sectors, only: [:index, :show]
         end
-        resources :plots
+        resources :plots, only: [:show]
         resources :users
       end
     end

@@ -4,30 +4,28 @@ class Meter < ActiveRecord::Base
 
   validates_associated :plot
   validates :number, presence: true
-  validates :state, presence: true
-  validates_inclusion_of :state, :in => METER_STATES, :allow_nil => true
+  validates :status, presence: true
+  validates_inclusion_of :status, :in => METER_STATUS, :allow_nil => true
 
 
   def last_measure
-    measures.select(:value, :comment, :created_at, :id).last
-  end
-
-  def last_measurer
-    User.find(last_measurer_id).name
-  end
-
-  def last_measurer_id
-    measures.last.user_id
+    measures.joins(:user).select("measures.value,
+                                  measures.status,
+                                  measures.comment,
+                                  measures.id,
+                                  measures.created_at,
+                                  users.name as last_measurer").last
   end
 
 
-  METER_STATES.each do |state|
-    define_method("#{state}?") do
-      self.state == state
+
+  METER_STATUS.each do |status|
+    define_method("#{status}?") do
+      self.status == status
     end
 
-    define_method("#{state}!") do
-      self.update_attribute(:state, state)
+    define_method("#{status}!") do
+      self.update_attribute(:status, status)
     end
   end
 
