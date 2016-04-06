@@ -5,7 +5,7 @@ require 'factory_girl_rails'
 require 'minitest/reporters'
 
 reporter_options = { color: true }
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_options)]
+Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new(reporter_options)]
 
 
 class ActiveSupport::TestCase
