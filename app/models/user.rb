@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_one :role
+  ROLE = %w{ admin superadmin user }
+
   has_many :measures
 
   validates :auth_token, uniqueness: true

@@ -3,28 +3,23 @@
 #
 # Examples:
 #
+
     Sector.destroy_all
     User.destroy_all
     Plot.destroy_all
     Condo.destroy_all
-    Role.destroy_all
-
 
     Condo.create([{ name: 'Rio Mar', description: 'Primer condo' },
                   { name: 'Campo Mar',description: 'Primer condo' }])
-
-    Role.create([{ name: 'Admin', },
-                 { name: 'Meter'},
-                 { name: 'SuperAdmin'}])
 
     Sector.create([{ name: 'Las Palmas', condo_id: Condo.first.id },
                  { name: 'Las Liebres', condo_id: Condo.first.id },
                  { name: 'Los Cipres', condo_id: Condo.last.id },
                  { name: 'El Bosque', condo_id: Condo.last.id }])
 
-    User.create([{ name: 'Seba', rut: '15.316.349-9', role_id: Role.first.id },
-                 { name: 'Gonzalo',rut: '16.299.222-8',role_id: Role.last.id },
-                 { name: 'Jenny',rut: '1.111.111-1',role_id: Role.where(name: "Meter").take.id }])
+    User.create([{ name: 'Seba', rut: '15.316.349-9', role: User::ROLE.first },
+                 { name: 'Gonzalo',rut: '16.299.222-8',role: User::ROLE.second },
+                 { name: 'Jenny',rut: '1.111.111-1',role: User::ROLE.third }])
 
     Owner.create([{ name: 'Seba', rut: '15.316.349-9' },
                  { name: 'Gonzalo',rut: '16.299.222-8'},
