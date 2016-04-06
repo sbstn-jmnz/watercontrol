@@ -4,7 +4,7 @@ module Api::Webapp::Plots
     belongs_to :sector_id
     belongs_to :owner_id
     has_one :owner
-    has_many :meters, serializer: Meters::MeterSerializer
+    has_many :meters, serializer: Api::Webapp::Meters::MeterSerializer
 
     def owner
       object.owner.name

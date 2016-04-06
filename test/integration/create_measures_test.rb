@@ -7,7 +7,7 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
   end
 
 
-  test 'Deberia registrar mediciones y obtener la ruta de acceso y un estado 201 como resultado' do
+  test 'deberia registrar mediciones y obtener la ruta de acceso y un estado 201 como resultado' do
     
     meter = FactoryGirl::build_stubbed :meter
     
@@ -26,14 +26,5 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
 
     assert_equal api_measure_url(user[:id]), response.location
   end
-
-  # test 'Deberia obtener todas las mediciones de una parcela' do
-
-
-
-  #   post '/mobileapp/'
-
-  # end
-
 
 end

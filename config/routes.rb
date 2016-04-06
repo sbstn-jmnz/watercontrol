@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         end
         resources :plots, only: [:show]
         resources :users
+        resources :meters, only: [:show] 
       end
     end
 

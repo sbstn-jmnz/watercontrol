@@ -4,7 +4,6 @@ module Api::Webapp::Measures
     belongs_to :meter_id
     belongs_to :user_id
 
-
     def user
       User.find(object.user_id).name
     end

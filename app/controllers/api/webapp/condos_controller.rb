@@ -10,7 +10,7 @@ module Api::Webapp
         if params[:id]
           condo = Condo.find(params[:id])
           render json: condo, status: 200, serializer: Condos::CondoSerializer,
-          include: 'sectors.plots.meters.measures'
+          include: 'sectors.plots.meters.last_measure'
         end
       end
 

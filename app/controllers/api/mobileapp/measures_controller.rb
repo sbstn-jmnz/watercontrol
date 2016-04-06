@@ -2,8 +2,9 @@ module Api::Mobileapp
   class MeasuresController < Api::ApplicationController
       
     def index
-      sectors = Sector.all
-      render json: sectors, status: 200, root: false
+      puts params.to_s
+      measures = Measure.all
+      render json: measures, status: 200, root: false
     end
 
     # def show
@@ -19,7 +20,7 @@ module Api::Mobileapp
     private
       
       def measure_params
-        params.permit(:value, :comment, :status)
+        params.permit(:value, :comment, :status, :meter_id)
       end
 
   end
