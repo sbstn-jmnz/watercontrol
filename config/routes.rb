@@ -13,9 +13,16 @@ Rails.application.routes.draw do
         end
         resources :plots, only: [:show]
         resources :users
-        resources :measures, expect: [:destroy, :new]
       end
     end
+
+    namespace :api, path: '/mobileapp' do
+      scope module: 'mobileapp' do
+        resources :measures, except: [:destroy, :new]
+      end
+
+    end
+
 
   end
 end

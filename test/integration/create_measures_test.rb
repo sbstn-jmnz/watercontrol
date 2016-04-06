@@ -11,14 +11,14 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
     
     meter = FactoryGirl::build_stubbed :meter
     
-    measureHash = { 
+    measureHash = {
       comment: 'Medición mes mayo',
       value: 100,
       status: MEASURES_STATUS.first,
       meter_id: meter.id
     }
 
-    post '/webapp/measures', measureHash.to_json, create_headers
+    post '/mobileapp/measures', measureHash.to_json, create_headers
                      
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type
@@ -26,4 +26,14 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
 
     assert_equal api_measure_url(user[:id]), response.location
   end
+
+  # test 'Deberia obtener todas las mediciones de una parcela' do
+
+
+
+  #   post '/mobileapp/'
+
+  # end
+
+
 end
