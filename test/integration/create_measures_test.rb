@@ -4,17 +4,26 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
 
   setup do
     host! 'api.watercontrol-dev.com'
-    user = User.create!
   end
-  test 'creates user' do
-    post '/webapp/users', { user:
-                     { name: 'User One', rut: '15.316.349-9'}}.to_json,
-                     { 'Accept' => Mime::JSON, 'Content-Type'=> Mime::JSON.to_s,
-                     'Authorization' => token_header(@user.auth_token)}
 
+
+  test 'creates measures' do
+    meter = FactoryGirl::build_stubbed :meter
+    measureHash = { 
+      # measure: {
+        value: 100,
+        comment: 'Medición mes mayo',
+        status: MEASURES_STATUS.first,
+        meter_id: meter.id
+      # },
+    }
+
+    post '/webapp/measures', measureHash.to_json, create_headers
+                     
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type
     user = json(response.body)
 
-    assert_equal api_user_url(user[:id]), response.location
+    assert_equal api_measure_url(user[:id]), response.location
   end
+end

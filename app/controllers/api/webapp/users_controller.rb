@@ -20,7 +20,7 @@ module Api::Webapp
       render json: users, status: 200, root: false
     end
 
-  private
+    private
 
       def user_params
         params.permit(:name, :rut)

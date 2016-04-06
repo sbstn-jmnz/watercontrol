@@ -20,4 +20,15 @@ class ActiveSupport::TestCase
     ActionController::HttpAuthentication::Token.encode_credentials(token)
   end
 
+  def create_headers
+    
+    user = User.create!
+    
+    { 'Accept' => Mime::JSON, 
+      'Content-Type'=> Mime::JSON.to_s,
+      'Authorization' => token_header(user.auth_token)
+    }
+  end
+  
+
 end
