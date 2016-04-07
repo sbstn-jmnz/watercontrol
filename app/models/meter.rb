@@ -1,11 +1,13 @@
 class Meter < ActiveRecord::Base
+  STATUS = %w{ active inactive }
+  
   belongs_to :plot
   has_many :measures
 
   validates_associated :plot
   validates :number, presence: true
   validates :status, presence: true
-  validates_inclusion_of :status, :in => METER_STATUS, :allow_nil => true
+  validates_inclusion_of :status, :in => STATUS, :allow_nil => true
 
 
   def last_measure
@@ -19,7 +21,7 @@ class Meter < ActiveRecord::Base
 
 
 
-  METER_STATUS.each do |status|
+  Meter::STATUS.each do |status|
     define_method("#{status}?") do
       self.status == status
     end

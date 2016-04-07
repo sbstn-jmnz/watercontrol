@@ -85,12 +85,6 @@ ActiveRecord::Schema.define(version: 20160405211116) do
   add_index "plots", ["owner_id"], name: "index_plots_on_owner_id", using: :btree
   add_index "plots", ["sector_id"], name: "index_plots_on_sector_id", using: :btree
 
-  create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "sectors", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
