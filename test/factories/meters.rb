@@ -3,6 +3,6 @@ FactoryGirl.define do
     id 1
     plot_id 1
     number 5
-    status METER_STATUS.first
+    status Meter::STATUS.first
   end
 end

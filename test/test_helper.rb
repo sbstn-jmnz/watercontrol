@@ -1,10 +1,12 @@
 ENV['RAILS_ENV'] ||= 'test'
+
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'factory_girl_rails'
 require 'minitest/reporters'
 
 reporter_options = { color: true }
+
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new(reporter_options)]
 
 

@@ -6,15 +6,19 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
     host! 'api.watercontrol-dev.com'
   end
 
+  test 'Deberia registrar mediciones y obtener la ruta de acceso y un estado 201 como resultado' do
 
-  test 'deberia registrar mediciones y obtener la ruta de acceso y un estado 201 como resultado' do
-    
-    meter = FactoryGirl::create :meter
+    meter = FactoryGirl::build_stubbed :meter
 
-    measureHash = { comment: 'Medición mes mayo', value: 100, status: MEASURES_STATUS.first , meter_id: meter.id}
+    measureHash = {
+      comment: 'Medición mes mayo',
+      value: 100,
+      status: Measure::STATUS.first,
+      meter_id: meter.id
+    }
 
-    post '/mobileapp/measures', measureHash.to_json, create_headers
-                     
+    post '/webapp/measures', measureHash.to_json, create_headers
+
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type
     user = json(response.body)

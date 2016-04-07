@@ -2,8 +2,6 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 # Examples:
-#
-
     Sector.destroy_all
     User.destroy_all
     Plot.destroy_all
@@ -53,6 +51,6 @@
 
     Meter.all.each do |meter|
       for n in 1..10
-      Measure.create( comment: 'blah blah', meter_id: meter.id, status: MEASURES_STATUS[n], user_id: User.last.id, value: n*100 )
+      Measure.create( comment: 'blah blah', meter_id: meter.id, status: Measure::STATUS[n], user_id: User.last.id, value: n*100 )
       end
     end

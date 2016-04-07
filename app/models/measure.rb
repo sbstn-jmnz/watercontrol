@@ -1,4 +1,6 @@
 class Measure < ActiveRecord::Base
+  STATUS = %w{ pending absent ok }
+  
   belongs_to :meter
   belongs_to :user
   belongs_to :measure_process

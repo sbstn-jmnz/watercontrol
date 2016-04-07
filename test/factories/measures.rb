@@ -4,6 +4,6 @@ FactoryGirl.define do
     meter_id 1
     comment "the comment"
     value 9999
-    status MEASURES_STATUS.first
+    status Measure::STATUS.first
   end
 end
