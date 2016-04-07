@@ -9,14 +9,9 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
 
   test 'deberia registrar mediciones y obtener la ruta de acceso y un estado 201 como resultado' do
     
-    meter = FactoryGirl::build_stubbed :meter
-    
-    measureHash = {
-      comment: 'Medición mes mayo',
-      value: 100,
-      status: MEASURES_STATUS.first,
-      meter_id: meter.id
-    }
+    meter = FactoryGirl::create :meter
+
+    measureHash = { comment: 'Medición mes mayo', value: 100, status: MEASURES_STATUS.first , meter_id: meter.id}
 
     post '/mobileapp/measures', measureHash.to_json, create_headers
                      

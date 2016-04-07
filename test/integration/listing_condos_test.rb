@@ -9,7 +9,7 @@ class ListingCondosTest < ActionDispatch::IntegrationTest
   condo = FactoryGirl::build_stubbed :condo
 
   test 'Retorna una lista todos los condominios' do
-    get '/webapp/condos', {}, {'Authorization' => token_header(@user.auth_token)}
+    get '/webapp/condos', {}, create_headers
     assert_equal 200, response.status
     refute_empty response.body
     assert_equal Condo.count, json(response.body).count
@@ -18,7 +18,7 @@ class ListingCondosTest < ActionDispatch::IntegrationTest
 
   test 'Retorna un condominio en particular con todas sus parcelas' do
     condo = FactoryGirl::create :Condotwo
-    get "/webapp/condos/#{condo.id}", {}, {'Authorization' => token_header(@user.auth_token)}
+    get "/webapp/condos/#{condo.id}", {}, create_headers
     assert_equal 200, response.status
   end
 

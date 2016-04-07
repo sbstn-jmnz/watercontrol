@@ -1,8 +1,8 @@
 FactoryGirl.define do
-  factory :plot_one do
+  factory :plot_one, class: Plot do
     plot_number '1'
     status 'sold'
-    sector_one
+    sector
     owner_one
   end
   factory :plot_two do
@@ -23,4 +23,5 @@ FactoryGirl.define do
     sector_four
     owner_four
   end
+
 end

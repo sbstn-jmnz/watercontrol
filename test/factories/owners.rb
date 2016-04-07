@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :owner_one do
+  factory :owner_one, class: Owner do
     name "owner one"
     rut "1.111.111-1"
   end
