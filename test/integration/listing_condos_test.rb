@@ -17,7 +17,7 @@ class ListingCondosTest < ActionDispatch::IntegrationTest
   end
 
   test 'Retorna un condominio en particular con todas sus parcelas' do
-    condo = FactoryGirl::create :Condotwo
+    condo = FactoryGirl::create :condo
     get "/webapp/condos/#{condo.id}", {}, create_headers
     assert_equal 200, response.status
   end
