@@ -35,6 +35,7 @@
         plot = Plot.create(plot_number: n, status: "sold", sector_id: Sector.where(condo_id: Condo.first.id).first.id,
         owner_id: Owner.order("RANDOM()").first.id)
         Meter.create(number: (n+100).to_s, status: "active", plot_id: plot.id)
+        Meter.create(number: (n+200).to_s, status: "active", plot_id: plot.id)
       else
         plot = Plot.create(plot_number: n, status: "available", sector_id: Sector.where(condo_id: Condo.first.id).last.id,
         owner_id: Owner.order("RANDOM()").first.id)
