@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         resources :plots, only: [:show]
         resources :users
         resources :meters, only: [:show] 
+        resources :measure_processes, only: [:index, :show, :create]
       end
     end
 
@@ -23,7 +24,6 @@ Rails.application.routes.draw do
       end
 
     end
-
 
   end
 end

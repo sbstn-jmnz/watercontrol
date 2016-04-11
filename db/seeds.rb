@@ -24,6 +24,11 @@
                  { name: 'Jenny',rut: '1.111.111-1' }])
 
 
+    MeasureProcess.create([{ fixed: 234.45, normal_price: 250, over_consumption_price: 200, status: MeasureProcess::STATUS.first},
+                           { fixed: 214.35, normal_price: 250, over_consumption_price: 220, status: MeasureProcess::STATUS.second},
+                           { fixed: 202.25, normal_price: 200, over_consumption_price: 180, status: MeasureProcess::STATUS.second}])
+
+
 #Plots, Meters and Measures for Condo Rio Mar
     for n in 1..10
       if n % 2 == 0
