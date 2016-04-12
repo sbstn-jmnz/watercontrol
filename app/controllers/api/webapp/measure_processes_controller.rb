@@ -6,8 +6,13 @@ module Api::Webapp
       render json: measuresProcesses, status: 200
     end
 
-    def show
-
+    def close
+      process = MeasureProcess.find(params[:id])
+      if process
+        process.status = MeasureProcess::STATUS.second
+        process.save        
+      end
+      render json: process, status: 204
     end
 
     def create

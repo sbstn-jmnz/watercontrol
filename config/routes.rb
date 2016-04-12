@@ -3,7 +3,10 @@ Rails.application.routes.draw do
     namespace :api, path: '/webapp' do
       scope module: 'webapp' do
         resources :condos, only: [:index, :show] do
-          resources :measure_processes, only: [:index, :show, :create]
+          resources :measure_processes, only: [:index, :show, :create] do
+            match 'close', :on => :member, :via => [:post]
+          end
+
         end
         resources :plots, only: [:show]
         resources :users
