@@ -7,14 +7,17 @@ module Api::Mobileapp
       render json: measures, status: 200, root: false
     end
 
-     def show
+     def update
+       #pendiente
      end
 
-     
+
     def create
       ActiveRecord::Base.transaction do
           params[:measures].each do |m|
           measure = Measure.create!(measure_params(m));
+          measure.status = Measure::STATUS.third
+          measure.save!
         end
       end
         render nothing: true, status: 204

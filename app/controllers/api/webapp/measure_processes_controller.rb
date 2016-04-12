@@ -10,7 +10,7 @@ module Api::Webapp
       process = MeasureProcess.find(params[:id])
       if process
         process.status = MeasureProcess::STATUS.second
-        process.save        
+        process.save
       end
       render json: process, status: 204
     end
@@ -29,7 +29,7 @@ module Api::Webapp
               Measure.create!({
               value: 0,
               status: 'pending',
-              user_id: User.where(role: 'user'),
+              user_id: User.where(role: 'user').take.id,
               meter_id: meter.id}
               )
             end
@@ -40,8 +40,6 @@ module Api::Webapp
           render nothing: true, status: 422
         end
     end
-
-
 
   private
 

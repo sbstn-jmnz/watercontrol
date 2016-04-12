@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405211116) do
+ActiveRecord::Schema.define(version: 20160412151341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,10 @@ ActiveRecord::Schema.define(version: 20160405211116) do
     t.decimal  "over_consumption_price"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "condo_id"
   end
+
+  add_index "charge_parameters", ["condo_id"], name: "index_charge_parameters_on_condo_id", using: :btree
 
   create_table "condos", force: :cascade do |t|
     t.string   "name"
@@ -105,6 +108,7 @@ ActiveRecord::Schema.define(version: 20160405211116) do
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
 
+  add_foreign_key "charge_parameters", "condos"
   add_foreign_key "measures", "measure_processes"
   add_foreign_key "measures", "meters"
   add_foreign_key "measures", "users"

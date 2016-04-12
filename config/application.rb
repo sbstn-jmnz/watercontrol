@@ -23,7 +23,7 @@ module Watercontrol
 
           resource '/api',
             :headers => :any,
-            :methods => [:post],
+            :methods => [:post, :patch],
             :credentials => false,
             :max_age => 0
 

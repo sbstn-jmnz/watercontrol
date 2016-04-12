@@ -6,6 +6,14 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
     host! 'api.watercontrol-dev.com'
   end
 
+  test 'Deberia actualizar una medicion del proceso actual y cambiar el estado' do
+    meter = FactoryGirl::create :meter
+    meter_two = FactoryGirl::create :meter_two
+    process = FactoryGirl::create :measure_process
+    user = FactoryGirl::create :user
+  end
+
+
   test 'Deberia registrar mediciones y obtener la ruta de acceso y un estado 201 como resultado' do
 
     meter = FactoryGirl::create :meter
@@ -35,7 +43,7 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
     post '/mobileapp/measures', measureHash.to_json, create_headers
 
     assert_equal 204, response.status
-    
+
   end
 
 end

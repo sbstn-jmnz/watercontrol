@@ -1,4 +1,5 @@
 class Condo < ActiveRecord::Base
+  has_one :charge_parameter
   has_many :sectors
   validates :name, :description, presence: true
 

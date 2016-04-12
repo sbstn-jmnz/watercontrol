@@ -50,6 +50,7 @@ FactoryGirl.define do
     fixed 10.1
     normal_price 15
     over_consumption_price 19
+    condo
   end
 
   factory :measure do

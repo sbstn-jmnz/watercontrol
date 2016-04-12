@@ -6,7 +6,11 @@ Rails.application.routes.draw do
           resources :measure_processes, only: [:index, :show, :create] do
             match 'close', :on => :member, :via => [:post]
           end
-
+          resources :charge_parameters, only: [:index] do
+            collection do
+              patch 'update'
+            end
+          end
         end
         resources :plots, only: [:show]
         resources :users

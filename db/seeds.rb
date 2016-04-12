@@ -5,10 +5,14 @@
     Sector.destroy_all
     User.destroy_all
     Plot.destroy_all
+    MeasureProcess.destroy_all
     Condo.destroy_all
 
     Condo.create([{ name: 'Rio Mar', description: 'Primer condo' },
                   { name: 'Campo Mar',description: 'Primer condo' }])
+
+    ChargeParameter.create([{ fixed: 500, normal_price: 30, over_consumption_price: 90, condo_id: Condo.first.id},
+                            { fixed: 1500, normal_price: 130, over_consumption_price: 190, condo_id: Condo.second.id}])
 
     Sector.create([{ name: 'Las Palmas', condo_id: Condo.first.id },
                  { name: 'Las Liebres', condo_id: Condo.first.id },
