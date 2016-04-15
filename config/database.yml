@@ -9,6 +9,14 @@ default: &default
   pool: 5
   timeout: 5000
 
+development_secondary:
+  adapter: sqlserver
+  database: BaseMulti
+  username: sa
+  password: c@bu12345
+  host: 192.168.0.37
+  timeout: 2000
+
 development:
   <<: *default
   database: water_development

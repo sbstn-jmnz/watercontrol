@@ -1,0 +1,19 @@
+
+<div class="container">
+  <div ncy-breadcrumb="ncy-breadcrumb"></div>
+  <form class="form">
+    <div class="form-group">
+      <label>Numero</label>
+      <input value="{{setplotsowners.plot.plot_number}}" disabled="disabled" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label>Dueño</label>
+      <ui-select ng-model="setplotsowners.selected.value">
+        <ui-select-match><span ng-bind="$select.selected.nombre"></span></ui-select-match>
+        <ui-select-choices repeat="item in (setplotsowners.plotsOwners | filter: $select.search) track by item.rut">
+          <div ng-bind-html="item.nombre | highlight: $select.search"></div><small>RUT: <span><b ng-bind-html="''+item.rut | highlight: $select.search"></b></span></small>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,101 @@
+
+<div class="row">
+  <div ncy-breadcrumb="ncy-breadcrumb"></div>
+  <div class="condos-container col-sm-4 col-lg-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">Proceso de medición Actual</div>
+      <div class="panel-body">
+        <div class="col-xs-12">
+          <button ng-if="measureProcesses.closed" ng-click="measureProcesses.initProcess()" class="btn btn-default">Iniciar Proceso</button>
+          <button ng-if="!measureProcesses.closed" ng-click="measureProcesses.closeProcess()" class="btn btn-default">Cerrar Proceso</button>
+        </div>
+        <div class="parameters-container col-xs-12">
+          <label>Parámetros Actuales</label><br/>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>Cargo Fijo </label>
+            </div>
+            <div class="col-xs-6">
+              <label>300</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>Valor m3</label>
+            </div>
+            <div class="col-xs-6">
+              <label>293</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>Sobreconsumo</label>
+            </div>
+            <div class="col-xs-6">
+              <label>100</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>Iniciado</label>
+            </div>
+            <div class="col-xs-6">
+              <label>---</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>Cerrado</label>
+            </div>
+            <div class="col-xs-6">
+              <label>---</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="plots-list col-sm-8 col-lg-6">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th class="col-xs-3">Cargo Fijo</th>
+          <th class="col-xs-2">Valor m3</th>
+          <th class="col-xs-3">Sobreconsumo</th>
+          <th class="col-xs-4">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        
+        
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--Esto debe ir en la pantalla asignada para crear nuevos parametros-->
+<!--.container
+.panel.panel-success
+  .panel-heading
+    | Mediciones
+  .panel-body
+    form
+      .form-group
+        label Establecer el cargo fijo
+        input.form-control(type="password")
+      .row
+        .col-xs-4
+          label Periodo de cobro
+        .col-xs-4
+          .form-group.text-center
+            label Desde
+            input.form-control(type="text")
+        .col-xs-4
+          .form-group.text-center
+            label Hasta
+            input.form-control(type="text")
+
+      .form-group.text-right
+        button.btn.btn-default(type="submit") Guardar
+-->

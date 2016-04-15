@@ -1,0 +1,26 @@
+
+<div ncy-breadcrumb=""></div>
+<div class="container">
+  <div class="panel panel-success">
+    <div class="panel-heading">Cambiar parámetros de cobro</div>
+    <div class="panel-body">
+      <form name="changechargeparametersForm">
+        <div class="form-group">
+          <label>Cargo fijo:</label>
+          <input type="number" ng-model="changeparameters.newParams.fixed" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Valor m3:</label>
+          <input type="number" ng-model="changeparameters.newParams.normal_price" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Valor sobreconsumo:</label>
+          <input type="number" ng-model="changeparameters.newParams.over_consumption_price" class="form-control"/>
+        </div>
+        <div class="form-group text-right">
+          <button ng-click="changeparameters.saveChanges(changeparameters.newParams)" class="btn btn-default">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

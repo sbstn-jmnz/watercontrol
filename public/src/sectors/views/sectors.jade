@@ -1,0 +1,43 @@
+.row
+  div(ncy-breadcrumb)
+  .col-sm-12.col-lg-8.col-lg-offset-2
+
+    .condos-container.col-sm-4.col-lg-4
+
+      .form-group
+        label Seleccione Sector
+        select.form-control(ng-options="sector.id as sector.name for sector in sectors.sectorsList",
+                            ng-model="sectors.selectedSectorId"
+                            ng-change="sectors.loadPlots(sectors.selectedSectorId)")
+
+
+    .search-container.col-sm-8.col-lg-6
+      form.form-inline( name="searchPlot",
+                        role="search",
+                        ng-submit="sectors.searchPlot(sectors.searchModel)")
+        .input-group.col-xs-12.add-on  
+
+          input.form-control( name="inputSearch", 
+                              ng-model="sectors.searchModel",
+                              ng-change="sectors.searchPlot(sectors.searchModel)")
+          .input-group-btn
+            button.btn.btn-default.search-button(type="submit")
+              i.fa.fa-search
+
+    .plots-list.col-sm-8.col-lg-6
+      table.table.table-hover.table-striped
+        thead
+          tr
+            th.col-xs-2 Número propiedad
+            th.col-xs-4 Valor última medición
+            th.col-xs-4 Lectura hecha por
+            th.col-xs-2
+        tbody
+          tr(ng-repeat="plot in sectors.plotsList track by plot.id")
+            td(ng-bind="plot.plot_number")
+            td(ng-bind="plot.meters[0].last_measure.value")
+            td(ng-bind="plot.meters[0].last_measure.last_measurer")
+            td 
+              a.btn.btn-info(ng-click="sectors.plotGo(plot.id)") Ver
+
+  

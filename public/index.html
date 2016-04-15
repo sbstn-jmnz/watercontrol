@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="MedicionAguaAdmin">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Master Tool">
+    <meta name="author" content="gpincheira@mastertool.cl">
+
+    <title>Medición Agua</title>
+    
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/select2/select2.css" />
+    <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
+    <!-- endbower -->
+    <!-- injector:css -->
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/home/home.css">
+    <link rel="stylesheet" href="assets/css/login/login.css">
+    <link rel="stylesheet" href="assets/css/maintenance/maintenance.css">
+    <link rel="stylesheet" href="assets/css/meters/meters.css">
+    <link rel="stylesheet" href="assets/css/navbar/navbar.css">
+    <link rel="stylesheet" href="assets/css/plots/plots.css">
+    <link rel="stylesheet" href="assets/css/scss/sectors.css">
+    <link rel="stylesheet" href="assets/css/sectors/sectors.css">
+    <link rel="stylesheet" href="assets/css/users/users.css">
+    <!-- endinjector -->
+  </head>
+
+  <body>
+
+    <div class="app-container" ui-view></div>
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-rut-validator/angular-rut-validator.js"></script>
+    <script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
+    <script src="bower_components/select2/select2.js"></script>
+    <script src="bower_components/angular-ui-select3/src/select3.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/ui-select/dist/select.js"></script>
+    <!-- endbower -->
+    <!-- injector:js -->
+    <script src="src/app.js"></script>
+    <script src="src/home/controllers/home.controller.js"></script>
+    <script src="src/home/home.routes.js"></script>
+    <script src="src/login/controllers/login.controller.js"></script>
+    <script src="src/login/login.routes.js"></script>
+    <script src="src/login/services/auth.service.js"></script>
+    <script src="src/main/controllers/main.controller.js"></script>
+    <script src="src/main/services/ApiInterceptors.factory.js"></script>
+    <script src="src/maintenance/controllers/assignsector.controller.js"></script>
+    <script src="src/maintenance/controllers/changechargeparameters.controller.js"></script>
+    <script src="src/maintenance/controllers/changepassword.controller.js"></script>
+    <script src="src/maintenance/controllers/maintenance.controller.js"></script>
+    <script src="src/maintenance/controllers/measures.processes.controller.js"></script>
+    <script src="src/maintenance/maintenance.routes.js"></script>
+    <script src="src/maintenance/services/changeparameters.service.js"></script>
+    <script src="src/maintenance/services/measure.processes.service.js"></script>
+    <script src="src/meters/controllers/meters.controller.js"></script>
+    <script src="src/meters/meters.routes.js"></script>
+    <script src="src/navbar/controllers/navbar.controller.js"></script>
+    <script src="src/plots/controllers/plot.measures.controller.js"></script>
+    <script src="src/plots/controllers/plots.controller.js"></script>
+    <script src="src/plots/controllers/plotsowners.controller.js"></script>
+    <script src="src/plots/controllers/setplotsowners.controller.js"></script>
+    <script src="src/plots/plots.routes.js"></script>
+    <script src="src/plots/services/plot.measures.service.js"></script>
+    <script src="src/plots/services/plots.service.js"></script>
+    <script src="src/sectors/controllers/sectors.controller.js"></script>
+    <script src="src/sectors/sectors.routes.js"></script>
+    <script src="src/sectors/services/condos.service.js"></script>
+    <script src="src/templates.js"></script>
+    <script src="src/users/controllers/addedit.controller.js"></script>
+    <script src="src/users/controllers/users.controller.js"></script>
+    <script src="src/users/services/users.service.js"></script>
+    <script src="src/users/users.routes.js"></script>
+    <!-- endinjector -->
+
+  </body>
+</html>

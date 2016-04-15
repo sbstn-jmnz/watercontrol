@@ -1,0 +1,21 @@
+.container.login-container
+  .row
+    .col-xs-12.col-sm-12.col-md-7.col-lg-8.hidden-xs.hidden-sm
+      img(src="assets/images/logo_menuprincipal.png", alt="", width="400")
+    .col-xs-12.col-sm-12.col-md-5.col-lg-4
+      .panel.panel-default
+        .panel-heading(style="font-size:16px;")
+          | Login
+        .panel-body
+          form.form-signin(name="loginForm")
+            span#reauth-email.reauth-email
+            input#inputEmail.form-control(type="email", placeholder="Email", ng-model="login.user.email", required)
+            input#inputPassword.form-control(type="password",placeholder="Password", ng-model="login.user.password",required)
+
+            #remember.checkbox
+              label Recuerdame
+                input(type="checkbox") 
+            .center-block.forgot-password
+              a ¿Olvidó su Password?
+        .panel-footer.text-right
+          button.btn.btn-lg.btn-primary.btn-block.btn-signin(type="submit", ng-disabled="loginForm.$invalid", ng-click="login.loginGo(login.user)") Ingresar

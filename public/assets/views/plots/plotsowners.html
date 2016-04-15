@@ -1,0 +1,56 @@
+
+<div class="container">
+  <div ncy-breadcrumb="ncy-breadcrumb"></div>
+  <div class="row">
+    <div class="col-sm-6 form-inline">
+      <div class="form-group">
+        <label style="display:block">Condominio:</label>
+        <select ng-options="condo.id as condo.name for condo in plotsowners.condosList" ng-model="plotsowners.selectedCondoId" ng-change="plotsowners.loadSectors(plotsowners.selectedCondoId)" class="form-control"></select>
+      </div>
+      <div class="form-group">
+        <label style="display:block">Sector:</label>
+        <select ng-options="sector.id as sector.name for sector in plotsowners.sectorsList" ng-model="plotsowners.selectedSectorId" ng-change="plotsowners.loadPlots(plotsowners.selectedSectorId)" class="form-control"></select>
+      </div>
+    </div>
+    <div class="search-container col-sm-6">
+      <form name="searchPlot" role="search" ng-submit="plotsowners.searchPlot(plotsowners.searchModel)" class="form-inline">
+        <div class="input-group col-xs-12 add-on"> 
+          <input name="inputSearch" ng-model="plotsowners.searchModel" ng-change="plotsowners.searchPlot(plotsowners.searchModel)" class="form-control"/>
+          <div class="input-group-btn">
+            <button type="submit" class="btn btn-default search-button"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row">
+      <div class="plots-list col-sm-12">
+        <table class="table table-hover table-striped table-condensed">
+          <thead>
+            <tr>
+              <th></th>
+              <th colspan="2" class="text-center">Dueño</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr>
+              <th class="col-xs-2">N° propiedad</th>
+              <th class="col-xs-4">Nombre</th>
+              <th class="col-xs-4">RUT</th>
+              <th class="col-xs-2">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="plot in plotsowners.plotsList track by plot.id">
+              <td ng-bind="plot.id"></td>
+              <td ng-bind="plot.owner"></td>
+              <td ng-bind=""></td>
+              <td> 
+                <div class="btn-group"><a ng-click="plotsowners.plotGo(plot.id)" class="btn btn-info btn-xs">Ver</a><a ui-sref="measures.setplotowners({id:plot.id})" ng-if="plot.owner" class="btn btn-primary btn-xs">Cambiar dueño</a><a ui-sref="measures.setplotowners({id:plot.id})" ng-if="!plot.owner" class="btn btn-primary btn-xs">Ingresar dueño</a></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

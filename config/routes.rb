@@ -15,13 +15,16 @@ Rails.application.routes.draw do
         resources :plots, only: [:show]
         resources :users
         resources :meters, only: [:show]
-
-      end
-    end
-
-    namespace :api, path: '/mobileapp' do
-      scope module: 'mobileapp' do
-        resources :measures, except: [:destroy, :new]
-      end
     end
   end
+
+  namespace :api, path: '/mobileapp' do
+    scope module: 'mobileapp' do
+      resources :measures, except: [:destroy, :new]
+    end
+  end
+
+  root :controller => 'static', :action => '/public/index.html'
+  get '*path' => 'application#index'
+
+end

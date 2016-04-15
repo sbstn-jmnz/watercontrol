@@ -1,0 +1,53 @@
+.container
+  div(ncy-breadcrumb)
+  .row
+    .col-sm-6.form-inline
+      .form-group
+        label(style="display:block") Condominio:
+        select.form-control(ng-options="condo.id as condo.name for condo in plotsowners.condosList"
+                            ng-model="plotsowners.selectedCondoId"
+                            ng-change="plotsowners.loadSectors(plotsowners.selectedCondoId)")
+      .form-group
+        label(style="display:block") Sector:
+        select.form-control(ng-options="sector.id as sector.name for sector in plotsowners.sectorsList",
+                            ng-model="plotsowners.selectedSectorId"
+                            ng-change="plotsowners.loadPlots(plotsowners.selectedSectorId)")
+
+
+    .search-container.col-sm-6
+      form.form-inline( name="searchPlot",
+                        role="search",
+                        ng-submit="plotsowners.searchPlot(plotsowners.searchModel)")
+        
+        .input-group.col-xs-12.add-on  
+          input.form-control( name="inputSearch", 
+                              ng-model="plotsowners.searchModel",
+                              ng-change="plotsowners.searchPlot(plotsowners.searchModel)")
+          .input-group-btn
+            button.btn.btn-default.search-button(type="submit")
+              i.fa.fa-search
+    .row
+      .plots-list.col-sm-12
+        table.table.table-hover.table-striped.table-condensed
+          thead
+            tr
+              th
+              th(colspan="2").text-center Dueño
+          thead
+            tr
+              th.col-xs-2 N° propiedad
+              th.col-xs-4 Nombre
+              th.col-xs-4 RUT
+              th.col-xs-2 Estado
+          tbody
+            tr(ng-repeat="plot in plotsowners.plotsList track by plot.id")
+              td(ng-bind="plot.id")
+              td(ng-bind="plot.owner")
+              td(ng-bind="")
+              td 
+                .btn-group
+                  a.btn.btn-info.btn-xs(ng-click="plotsowners.plotGo(plot.id)") Ver
+                  a.btn.btn-primary.btn-xs(ui-sref="measures.setplotowners({id:plot.id})", ng-if="plot.owner") Cambiar dueño
+                  a.btn.btn-primary.btn-xs(ui-sref="measures.setplotowners({id:plot.id})", ng-if="!plot.owner") Ingresar dueño
+
+  
