@@ -8,9 +8,11 @@ module Api::Webapp
 
       def show
         if params[:id]
+
           condo = Condo.find(params[:id])
           render json: condo, status: 200, serializer: Condos::CondoSerializer,
           include: 'sectors.plots.meters.measures'
+
         end
       end
 

@@ -1,6 +1,8 @@
 GIT
   remote: git://github.com/rails-api/active_model_serializers.git
+
   revision: 61412d80cabc3900dfbd886bc3f25fb0e0d39433
+
   specs:
     active_model_serializers (0.10.0.rc4)
       actionpack (>= 4.0)
@@ -132,14 +134,20 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers!
+<<<<<<< HEAD
   byebug
+=======
+>>>>>>> 0f3450655b67c27c5df53855f6a4387d1e0e7b85
   factory_girl_rails (~> 4.0)
   minitest-reporters
   pg
   rack-cors
   rails (= 4.2.5.2)
   rails-api
+<<<<<<< HEAD
   rails-erd
 
 BUNDLED WITH
    1.11.2
+=======
+>>>>>>> 0f3450655b67c27c5df53855f6a4387d1e0e7b85
