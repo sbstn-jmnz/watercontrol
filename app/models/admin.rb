@@ -1,5 +1,5 @@
 class Admin < ActiveRecord::Base
   ROLE = %w{ admin superadmin }
 
-  has_many :condos
+  has_and_belongs_to_many :condos
 end

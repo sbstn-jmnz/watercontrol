@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-ROLE = %w{ admin superadmin user }
+ROLE = %w{ user }
+
   has_many :measures
   has_many :sectors
 
