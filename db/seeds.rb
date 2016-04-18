@@ -5,11 +5,16 @@
     Sector.destroy_all
     User.destroy_all
     Plot.destroy_all
+    Admin.destroy_all
     MeasureProcess.destroy_all
     Condo.destroy_all
 
-    Condo.create([{ name: 'Rio Mar', description: 'Primer condo' },
-                  { name: 'Campo Mar',description: 'Primer condo' }])
+    Admin.create([{ name: 'Seba', rut: '15.316.349-9', role: Admin::ROLE.first },
+                 { name: 'Gonzalo',rut: '16.299.222-8',role: Admin::ROLE.second },
+                 { name: 'Jenny',rut: '1.111.111-1',role: Admin::ROLE.third }])
+
+    Condo.create([{ name: 'Rio Mar', description: 'Primer condo', admin_id: Admin.first.id},
+                  { name: 'Campo Mar',description: 'Primer condo', admin_id: Admin.second.id}])
 
     ChargeParameter.create([{ fixed: 500, normal_price: 30, over_consumption_price: 90, condo_id: Condo.first.id},
                             { fixed: 1500, normal_price: 130, over_consumption_price: 190, condo_id: Condo.second.id}])
@@ -19,9 +24,9 @@
                  { name: 'Los Cipres', condo_id: Condo.last.id },
                  { name: 'El Bosque', condo_id: Condo.last.id }])
 
-    User.create([{ name: 'Seba', rut: '15.316.349-9', role: User::ROLE.first },
-                 { name: 'Gonzalo',rut: '16.299.222-8',role: User::ROLE.second },
-                 { name: 'Jenny',rut: '1.111.111-1',role: User::ROLE.third }])
+    User.create([{ name: 'User1', rut: '15.316.349-9', role: User::ROLE.first },
+                 { name: 'User2',rut: '16.299.222-8',role: User::ROLE.first },
+                 { name: 'User3',rut: '1.111.111-1',role: User::ROLE.first }])
 
     Owner.create([{ name: 'Seba', rut: '15.316.349-9' },
                  { name: 'Gonzalo',rut: '16.299.222-8'},

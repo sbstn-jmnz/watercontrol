@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  ROLE = %w{ admin superadmin user }
-
+ROLE = %w{ admin superadmin user }
   has_many :measures
+  has_many :sectors
 
   validates :auth_token, uniqueness: true
   before_create :set_auth_token

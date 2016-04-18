@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415192204) do
+ActiveRecord::Schema.define(version: 20160418161829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.string   "auth_token"
+    t.string   "name"
+    t.string   "rut"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "charge_parameters", force: :cascade do |t|
     t.decimal  "fixed"
@@ -32,7 +40,10 @@ ActiveRecord::Schema.define(version: 20160415192204) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.text     "description"
+    t.integer  "admin_id"
   end
+
+  add_index "condos", ["admin_id"], name: "index_condos_on_admin_id", using: :btree
 
   create_table "measure_processes", force: :cascade do |t|
     t.string   "status"
@@ -93,9 +104,11 @@ ActiveRecord::Schema.define(version: 20160415192204) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "condo_id"
+    t.integer  "user_id"
   end
 
   add_index "sectors", ["condo_id"], name: "index_sectors_on_condo_id", using: :btree
+  add_index "sectors", ["user_id"], name: "index_sectors_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -109,6 +122,7 @@ ActiveRecord::Schema.define(version: 20160415192204) do
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
 
   add_foreign_key "charge_parameters", "condos"
+  add_foreign_key "condos", "admins"
   add_foreign_key "measures", "measure_processes"
   add_foreign_key "measures", "meters"
   add_foreign_key "measures", "users"
@@ -116,4 +130,5 @@ ActiveRecord::Schema.define(version: 20160415192204) do
   add_foreign_key "plots", "owners"
   add_foreign_key "plots", "sectors"
   add_foreign_key "sectors", "condos"
+  add_foreign_key "sectors", "users"
 end
