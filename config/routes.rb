@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         resources :plots, only: [:show]
         resources :users
         resources :meters, only: [:show]
+        resources :sessions, only: [:create]
     end
   end
 

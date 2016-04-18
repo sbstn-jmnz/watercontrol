@@ -149,6 +149,3 @@ DEPENDENCIES
   rails-api
   rails-erd
   tiny_tds
-
-BUNDLED WITH
-   1.11.2

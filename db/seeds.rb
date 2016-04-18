@@ -9,9 +9,9 @@
     MeasureProcess.destroy_all
     Condo.destroy_all
 
-    Admin.create([{ name: 'Seba', rut: '15.316.349-9', role: Admin::ROLE.first },
-                 { name: 'Gonzalo',rut: '16.299.222-8',role: Admin::ROLE.second },
-                 { name: 'Jenny',rut: '1.111.111-1',role: Admin::ROLE.third }])
+    Admin.create([{ name: 'Seba', rut: '15.316.349-9' },
+                 { name: 'Gonzalo',rut: '16.299.222-8'},
+                 { name: 'Jenny',rut: '1.111.111-1'}])
 
     Condo.create([{ name: 'Rio Mar', description: 'Primer condo', admin_id: Admin.first.id},
                   { name: 'Campo Mar',description: 'Primer condo', admin_id: Admin.second.id}])
