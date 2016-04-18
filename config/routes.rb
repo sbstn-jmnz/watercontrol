@@ -11,6 +11,7 @@ Rails.application.routes.draw do
               patch 'update'
             end
           end
+          resources :sectors
         end
         resources :plots, only: [:show]
         resources :users
