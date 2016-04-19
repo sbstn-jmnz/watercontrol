@@ -8,11 +8,12 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
 
   test 'Debe retornar una lista de las mediciones pendientes de sus sectores asignados' do
     user = FactoryGirl.create(:user)
-    user = FactoryGirl.create(:measure_process)
+    measure_process = FactoryGirl.create(:measure_process)
 
-    get "/mobileapp/users/#{user.id}/sector", {}, create_headers
+    get "/mobileapp/users/#{user.id}/sectors", {}, create_headers
 
     assert_equal 200, response.status
+    refute_empty response.body
 
   end
 
