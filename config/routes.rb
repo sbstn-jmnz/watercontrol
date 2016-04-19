@@ -14,7 +14,7 @@ Rails.application.routes.draw do
           resources :sectors
         end
         resources :plots, only: [:show]
-        resources :users
+        resources :users, only: [:show, :create, :index]
         resources :meters, only: [:show]
         resources :sessions, only: [:create]
     end
@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
   namespace :api, path: '/mobileapp' do
     scope module: 'mobileapp' do
+      resources :users, only: [:show] do
+        resources :sector, only: [:index]
+      end
       resources :measures, except: [:destroy, :new]
       resources :sessions, only: [:create]
     end

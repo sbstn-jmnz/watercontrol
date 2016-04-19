@@ -4,7 +4,7 @@ module Api::Webapp
     def create
   		admin = Admin.find_by(email: admin_params[:email])
   		if admin && admin.authenticate(hash_password)
-        render json: admin, status: 201, root: false
+        render json: admin, serializer: Api::Webapp::Admins::AdminSerializer, status: 201, root: false
       else
         admin = { message: 'Invalid credentials' }
         render json: admin, status: 401

@@ -3,7 +3,6 @@ module Api
     include ActionController::HttpAuthentication::Token::ControllerMethods
     before_action :authenticate
 
-
     protected
 
     def authenticate
@@ -12,7 +11,7 @@ module Api
 
     def authenticate_token
       authenticate_or_request_with_http_token('Application') do |token, options|
-        User.find_by(auth_token: token)
+        User.find_by(auth_token: token) || Admin.find_by(auth_token: token)
       end
     end
 

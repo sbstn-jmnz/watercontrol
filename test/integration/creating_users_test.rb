@@ -28,7 +28,6 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
   end
 
   test 'list users' do
-
     get '/webapp/users',{},{'Authorization' => token_header(@user.auth_token)}
       assert_equal 200, response.status
       refute_empty response.body

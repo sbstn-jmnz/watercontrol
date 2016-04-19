@@ -4,6 +4,7 @@ class Admin < ActiveRecord::Base
   has_and_belongs_to_many :condos
   validates :name, :email, :password, :rut, presence: true
   before_save :md5_password
+  before_create :set_auth_token
 
   def authenticate(password)
     if self.password == password

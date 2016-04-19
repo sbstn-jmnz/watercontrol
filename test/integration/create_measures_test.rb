@@ -6,6 +6,16 @@ class CreatingMeasuresTest < ActionDispatch::IntegrationTest
     host! 'api.watercontrol-dev.com'
   end
 
+  test 'Debe retornar una lista de las mediciones pendientes de sus sectores asignados' do
+    user = FactoryGirl.create(:user)
+    user = FactoryGirl.create(:measure_process)
+
+    get "/mobileapp/users/#{user.id}/sector", {}, create_headers
+
+    assert_equal 200, response.status
+
+  end
+
   test 'Deberia actualizar una medicion del proceso actual y cambiar el estado' do
     meter = FactoryGirl::create :meter
     meter_two = FactoryGirl::create :meter_two
