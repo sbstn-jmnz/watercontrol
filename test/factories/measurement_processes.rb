@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :owner do
     name 'Piero Brunetti'
     rut '15.316.349-9'
-    #plots {[FactoryGirl.build(:plot)]}
   end
 
   factory :user do
@@ -11,7 +10,6 @@ FactoryGirl.define do
     email 'info@mastertool.cl'
     password 'secretcode'
     role User::ROLE.third
-    #sectors {[FactoryGirl.build(:sector), FactoryGirl.build(:sector_2)]}
   end
 
   factory :condo do
