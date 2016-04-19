@@ -7,6 +7,8 @@ FactoryGirl.define do
   factory :user do
     name "MyString"
     rut "MyString"
+    email 'info@mastertool.cl'
+    password 'secretcode'
     role User::ROLE.third
   end
 

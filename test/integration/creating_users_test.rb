@@ -4,13 +4,21 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
 
   setup do
     host! 'api.watercontrol-dev.com'
-    user = User.create!
+    user = FactoryGirl::create :user
   end
-  test 'creates user' do
+  test 'creates user with email and password' do
     post '/webapp/users', { user:
-                     { name: 'User One', rut: '15.316.349-9'}}.to_json,
-                     { 'Accept' => Mime::JSON, 'Content-Type'=> Mime::JSON.to_s,
-                     'Authorization' => token_header(@user.auth_token)}
+                            { name: 'User One',
+                              rut: '15.316.349-9',
+                              password: 'password',
+                              password_confirm: 'password',
+                              email: 'info@mastertool.cl'
+                              }
+                          }.to_json,#--end of data post parameter--
+                          { 'Accept' => Mime::JSON,
+                            'Content-Type'=> Mime::JSON.to_s,
+                            'Authorization' => token_header(@user.auth_token)
+                          }#--end of headers--rake
 
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type

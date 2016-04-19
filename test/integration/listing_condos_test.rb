@@ -4,7 +4,7 @@ class ListingCondosTest < ActionDispatch::IntegrationTest
 
   setup do
     host! 'api.watercontrol-dev.com'
-    @user = User.create!
+    @user = FactoryGirl::create :user
   end
   condo = FactoryGirl::build_stubbed :condo
 

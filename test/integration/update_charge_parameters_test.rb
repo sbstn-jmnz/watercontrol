@@ -4,7 +4,7 @@ class UpdateChargeParametersTest < ActionDispatch::IntegrationTest
 
   setup do
     host! 'api.watercontrol-dev.com'
-    @user = User.create!
+    @user = FactoryGirl::create :user
   end
 
   charge_parameters = FactoryGirl::create :charge_parameter

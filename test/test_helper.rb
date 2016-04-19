@@ -24,7 +24,7 @@ class ActiveSupport::TestCase
 
   def create_headers
     
-    user = User.create!
+    user = FactoryGirl::create :user
     
     { 'Accept' => Mime::JSON, 
       'Content-Type'=> Mime::JSON.to_s,

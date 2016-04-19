@@ -4,7 +4,7 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
 
   setup do
   host! 'api.watercontrol-dev.com'
-  @user = User.create!
+  @user = FactoryGirl::create :user
   end
 
   test 'valid authentication with token' do
