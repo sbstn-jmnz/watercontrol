@@ -16,7 +16,7 @@ module Api::Webapp
     end
 
     def create
-       if MeasureProcess.where(status: 'active').count == 0
+      if MeasureProcess.where(status: 'active').count == 0
            condo = Condo.find(params[:condo_id])
            ActiveRecord::Base.transaction do
             process = MeasureProcess.create!({

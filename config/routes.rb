@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   namespace :api, path: '/mobileapp' do
     scope module: 'mobileapp' do
       resources :users, only: [:show] do
-        resources :sector, only: [:index]
+        resources :sectors, only: [:index]
       end
       resources :measures, except: [:destroy, :new]
       resources :sessions, only: [:create]

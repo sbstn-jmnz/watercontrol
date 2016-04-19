@@ -2,6 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 # Examples:
+    AdminsCondo.destroy_all
     Sector.destroy_all
     User.destroy_all
     Plot.destroy_all
@@ -15,6 +16,9 @@
 
     Condo.create([{ name: 'Rio Mar', description: 'Primer condo', admin_id: Admin.first.id},
                   { name: 'Campo Mar',description: 'Primer condo', admin_id: Admin.second.id}])
+
+    AdminsCondo.create([{ admin_id: Admin.first.id, condo_id: Condo.first.id},
+                        { admin_id: Admin.first.id, condo_id: Condo.second.id}])
 
     ChargeParameter.create([{ fixed: 500, normal_price: 30, over_consumption_price: 90, condo_id: Condo.first.id},
                             { fixed: 1500, normal_price: 130, over_consumption_price: 190, condo_id: Condo.second.id}])
