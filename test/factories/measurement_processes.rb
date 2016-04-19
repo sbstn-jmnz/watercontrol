@@ -73,4 +73,12 @@ FactoryGirl.define do
     measure_process
   end
 
+  factory :admin do
+      auth_token "MyString"
+      name "MyString"
+      rut "MyString"
+      email 'infoadmin@mastertool.cl'
+      password 'secretcodeadmin'
+    end
+
 end

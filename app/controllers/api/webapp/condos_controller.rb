@@ -13,6 +13,5 @@ module Api::Webapp
           include: 'sectors.plots.meters.last_measure'
         end
       end
-
     end
 end

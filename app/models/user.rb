@@ -9,8 +9,15 @@ ROLE = %w{ user }
   before_create :set_auth_token
   before_save :md5_password
 
-  private
+  def authenticate(password)
+     if self.password == password
+       true
+     else
+       false
+     end
+  end
 
+  protected
 
   def md5_password
     self.password = Digest::MD5.hexdigest self.password

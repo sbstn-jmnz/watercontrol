@@ -9,9 +9,9 @@
     MeasureProcess.destroy_all
     Condo.destroy_all
 
-    Admin.create([{ name: 'Seba', rut: '15.316.349-9' },
-                 { name: 'Gonzalo',rut: '16.299.222-8'},
-                 { name: 'Jenny',rut: '1.111.111-1'}])
+    Admin.create([{ name: 'Seba', rut: '15.316.349-9', email: 'admin1@mastertool.cl', password:'secretcodeadm1' },
+                 { name: 'Gonzalo',rut: '16.299.222-8', email: 'admin2@mastertool.cl', password:'secretcodeadm1'},
+                 { name: 'Jenny',rut: '1.111.111-1', email: 'admin3@mastertool.cl', password:'secretcode1adm'}])
 
     Condo.create([{ name: 'Rio Mar', description: 'Primer condo', admin_id: Admin.first.id},
                   { name: 'Campo Mar',description: 'Primer condo', admin_id: Admin.second.id}])
@@ -24,9 +24,9 @@
                  { name: 'Los Cipres', condo_id: Condo.last.id },
                  { name: 'El Bosque', condo_id: Condo.last.id }])
 
-    User.create([{ name: 'User1', rut: '15.316.349-9', role: User::ROLE.first },
-                 { name: 'User2',rut: '16.299.222-8',role: User::ROLE.first },
-                 { name: 'User3',rut: '1.111.111-1',role: User::ROLE.first }])
+    User.create([{ name: 'User1', rut: '15.316.349-9', role: User::ROLE.first, email: 'info1@mastertool.cl', password:'secretcode1' },
+                 { name: 'User2',rut: '16.299.222-8',role: User::ROLE.first, email: 'info2@mastertool.cl', password: 'secretcode2'},
+                 { name: 'User3',rut: '1.111.111-1',role: User::ROLE.first, email: 'info3@mastertool.cl', password: 'secretcode3'}])
 
     Owner.create([{ name: 'Seba', rut: '15.316.349-9' },
                  { name: 'Gonzalo',rut: '16.299.222-8'},

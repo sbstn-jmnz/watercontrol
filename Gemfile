@@ -8,7 +8,6 @@ group :development, :test do
     gem "factory_girl_rails", "~> 4.0"
     gem "rails-erd"
     gem "byebug"
-
 end
 
 gem 'minitest-reporters', group: :test
