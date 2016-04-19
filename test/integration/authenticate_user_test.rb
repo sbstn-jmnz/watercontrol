@@ -18,4 +18,9 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
     assert_equal 401, response.status
   end
 
+  test 'sign_in_user' do
+    post '/mobileapp/sessions',{ user: { email: @user.email, password: @user.password } }.to_json, {}
+    assert_equal 201, response.status
+  end
+
 end
