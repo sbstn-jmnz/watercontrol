@@ -1,6 +1,6 @@
 module Api::Mobileapp::Plots
   class CondosPlotSerializer < ActiveModel::Serializer
-    attributes :id, :plot_number, :owner
+    attributes :id, :plot_number, :owner, :status
     belongs_to :sector_id
     belongs_to :owner_id
     has_one :owner
@@ -10,5 +10,8 @@ module Api::Mobileapp::Plots
       object.owner.name
     end
 
+    def meters
+      object.meters.where(status: Meter::STATUS.first)
+    end
   end
 end
