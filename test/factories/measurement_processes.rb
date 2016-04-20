@@ -25,6 +25,8 @@ FactoryGirl.define do
 
   factory :sector_2, class: :sector do
     name 'Las Qubradas'
+    condo
+    user
   end
 
   factory :plot do
