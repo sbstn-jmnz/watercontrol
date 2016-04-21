@@ -8,9 +8,10 @@ class ListingMeasuresTest < ActionDispatch::IntegrationTest
 
 
   test 'deberia retornar una lista todos las mediciones de un medidor' do
-
-    measure = FactoryGirl::create :measure
-    measure_two = FactoryGirl::create :measure_two
+    meter = create :meter
+    user = create :user
+    measure = create(:measure, meter_id: meter.id, user_id: user.id)
+    measure_two = create(:measure_two, meter_id: meter.id, user_id: user.id)
 
     get "/webapp/meters/#{measure.meter.id}", {}, create_headers
 

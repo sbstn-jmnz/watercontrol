@@ -39,13 +39,11 @@ FactoryGirl.define do
   factory :meter do
     number '123'
     status Meter::STATUS.first
-    plot
   end
 
   factory :meter_two, class: Meter do
-    number '123'
+    number '124'
     status Meter::STATUS.first
-    plot
   end
 
   factory :measure_process do
@@ -59,16 +57,12 @@ FactoryGirl.define do
     fixed 10.1
     normal_price 15
     over_consumption_price 19
-    condo
   end
 
   factory :measure do
     comment 'bla bla factory'
     status Measure::STATUS.first
     value 207
-    meter
-    user
-    measure_process
   end
 
   factory :measure_two, class: Measure do

@@ -6,9 +6,8 @@ class UpdateChargeParametersTest < ActionDispatch::IntegrationTest
     host! 'api.watercontrol-dev.com'
     @user = FactoryGirl::create :user
   end
-
-  charge_parameters = FactoryGirl::create :charge_parameter
-
+  condo = FactoryGirl::create(:condo)
+  charge_parameters = FactoryGirl::create( :charge_parameter, condo_id: condo.id )
   test 'Actualiza parametros de cobro por condominio' do
     charge_parameters_hash = {
         fixed: 500,
