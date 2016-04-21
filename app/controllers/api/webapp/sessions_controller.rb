@@ -1,5 +1,6 @@
 module Api::Webapp
   class SessionsController < ActionController::API
+    before_action :authenticate
 
     def create
   		admin = Admin.find_by(email: admin_params[:email])
@@ -11,10 +12,19 @@ module Api::Webapp
   		end
   	end
 
-  private
+  protected
+
+  def authenticate
+    admin_params[:auth_token] ? authenticate_token : create
+  end
+
+  def authenticate_token
+    admin = Admin.find_by(auth_token: admin_params[:auth_token])
+    render json: admin, status: 200
+  end
 
   def admin_params
-  	params.permit(:email, :password)
+  	params.permit(:email, :password, :auth_token)
   end
 
   def hash_password
