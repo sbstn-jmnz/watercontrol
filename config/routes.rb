@@ -11,8 +11,9 @@ Rails.application.routes.draw do
               patch 'update'
             end
           end
-          resources :sectors
+          resources :sectors , only: [:show]
         end
+        resources :sectors, only: [:update]
         resources :plots, only: [:show]
         resources :users, only: [:show, :create, :index]
         resources :meters, only: [:show]

@@ -20,7 +20,7 @@ module Api::Webapp
 
   def authenticate_token
     admin = Admin.find_by(auth_token: admin_params[:auth_token])
-    render json: admin, status: 200
+    render json: admin, status: 200, serializer: Api::Webapp::Admins::AdminSerializer, root: false
   end
 
   def admin_params
