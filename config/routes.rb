@@ -5,15 +5,16 @@ Rails.application.routes.draw do
         resources :condos, only: [:index, :show] do
           resources :measure_processes, only: [:index, :show, :create] do
             match 'close', :on => :member, :via => [:post]
+
           end
           resources :charge_parameters, only: [:index] do
             collection do
               patch 'update'
             end
           end
-          resources :sectors , only: [:show]
+          resources :sectors , only: [:show, :index]
+          put 'sectors', :controller => 'sectors', :action => 'update'
         end
-        resources :sectors, only: [:update]
         resources :plots, only: [:show]
         resources :users, only: [:show, :create, :index]
         resources :meters, only: [:show]
@@ -27,7 +28,6 @@ Rails.application.routes.draw do
         resources :sectors, only: [:index]
       end
       put 'measures', :controller => 'measures', :action => 'update'
-      #resources :measures, only: [:update]
       resources :sessions, only: [:create]
     end
   end

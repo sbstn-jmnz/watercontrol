@@ -10,22 +10,16 @@ class UpdateSectorTest < ActionDispatch::IntegrationTest
     @sector2 = FactoryGirl::create(:sector, user_id: @user2.id)
   end
 
-  test 'Retorna una lista todos los condominios' do
-
+  test 'Retorna una lista todos los sectores del condominios' do
+    get "/webapp/condos/#{@sector.condo_id}/sectors",{},create_headers
+    assert_equal 200, response.status
   end
 
   test 'Solicitud mal hecha' do
-    sectorHash = {
-      :sectors => [{
-        id: @sector.id,
-        user_id:
-        },
-      {
-        id: @sector2.id,
-        user_id: @user2.id
-      }]
-    }
-    put "/webapp/sectors", sectorHash.to_json, create_headers
+    sectorHash = {:sectors => [{ id: nil, user_id: nil },
+                               { id: @sector2.id, user_id: @user2.id }]}
+
+    put "/webapp/condos/#{@sector.condo_id}/sectors", sectorHash.to_json, create_headers
     assert_equal 422, response.status
   end
 

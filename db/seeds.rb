@@ -38,7 +38,7 @@
                  { name: 'El Pozo', condo_id: Condo.first.id, user_id: User.first.id },
                  { name: 'El Puente', condo_id: Condo.first.id, user_id: User.second.id },
                  { name: 'Los Aromos', condo_id: Condo.first.id, user_id: User.second.id },
-                 { name: 'Los Aromos', condo_id: Condo.first.id, user_id: User.second.id },
+                 { name: 'Los Vientos', condo_id: Condo.first.id, user_id: User.second.id },
                  { name: 'Los Cipres', condo_id: Condo.last.id, user_id: User.third.id },
                  { name: 'Los Pinos', condo_id: Condo.last.id, user_id: User.third.id },
                  { name: 'Las Lomas', condo_id: Condo.last.id, user_id: User.third.id },
