@@ -9,9 +9,17 @@ default: &default
   pool: 5
   timeout: 5000
 
-development_secondary:
+development_account_holders:
   adapter: sqlserver
   database: BaseMulti
+  username: sa
+  password: c@bu12345
+  dataserver: '192.168.0.37\TEST'
+  timeout: 2000
+
+development_sales:
+  adapter: sqlserver
+  database: BaseVenta
   username: sa
   password: c@bu12345
   dataserver: '192.168.0.37\TEST'

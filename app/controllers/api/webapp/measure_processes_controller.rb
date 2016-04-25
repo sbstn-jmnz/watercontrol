@@ -10,7 +10,9 @@ module Api::Webapp
       process = MeasureProcess.find(params[:id])
       if process
         process.status = MeasureProcess::STATUS.second
+        process.closed_at = Time.now
         process.save
+        Invoice.create_invoices
       end
       render json: process, status: 204
     end

@@ -18,8 +18,8 @@ class UpdateMeasuresTest < ActionDispatch::IntegrationTest
     get "/mobileapp/users/#{@sector.user_id}/sectors", {}, create_headers
     assigned_sectors = json(response.body)
     assert_equal 200, response.status
-    assert_equal assigned_sectors[:sectors][0][:plots][0][:meters][0][:measure][0][:status], 'pending'
-    assert_equal assigned_sectors[:sectors][0][:plots][0][:meters][0][:measure][0][:value], 0
+    assert_equal assigned_sectors[:sectors][0][:plots][0][:meters][0][:measure][:status], 'pending'
+    assert_equal assigned_sectors[:sectors][0][:plots][0][:meters][0][:measure][:value], 0
     refute_empty response.body
   end
 

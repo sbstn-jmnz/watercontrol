@@ -56,10 +56,15 @@
                  { name: 'Jenny',rut: '1.111.111-1' }])
 
 #Crea tres procesos de medicion dos pasados y cerrados y uno activo.
-    MeasureProcess.create([
-      { fixed: 234.45, normal_price: 250, over_consumption_price: 200, status: MeasureProcess::STATUS.second, created_at: Time.now.end_of_month - 3.months},
-      { fixed: 214.35, normal_price: 250, over_consumption_price: 220, status: MeasureProcess::STATUS.second, created_at: Time.now.end_of_month - 2.months},
-      { fixed: 202.25, normal_price: 200, over_consumption_price: 180, status: MeasureProcess::STATUS.first, created_at: Time.now.end_of_month - 1.months}])
+MeasureProcess.create([
+  { fixed: 234.45, normal_price: 250, over_consumption_price: 200, status: MeasureProcess::STATUS.second,
+   created_at: Time.now.end_of_month - 3.months, closed_at: (Time.now.end_of_month - 3.months) + 24.hours },
+
+  { fixed: 214.35, normal_price: 250, over_consumption_price: 220, status: MeasureProcess::STATUS.second,
+    created_at: Time.now.end_of_month - 2.months,  closed_at: (Time.now.end_of_month - 3.months) + 24.hours },
+
+  { fixed: 202.25, normal_price: 200, over_consumption_price: 180, status: MeasureProcess::STATUS.first,
+    created_at: Time.now.end_of_month - 1.months, closed_at: (Time.now.end_of_month - 3.months) + 24.hours }])
 
 #Crea 10 parcelas a cada sector con estado y duenos aleatorios
 
@@ -92,9 +97,11 @@ prob = [1,2,3,4]
     Meter.all.each do |meter|
       if meter.status == Meter::STATUS.first
         MeasureProcess.all.each do |process|
+          i = 1
           if process.status == MeasureProcess::STATUS.second #Proceso cerrado
             Measure.create( comment: 'blah blah', meter_id: meter.id, status: Measure::STATUS.third, user_id: User.last.id,
-            value: 100, measure_process_id: process.id )
+            value: 100*i, measure_process_id: process.id )
+            i += i
           else
             Measure.create( comment: 'blah blah', meter_id: meter.id, status: Measure::STATUS.first, user_id: User.last.id,
             value: 0, measure_process_id: process.id )
