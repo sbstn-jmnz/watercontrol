@@ -4,10 +4,14 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
 
   setup do
     host! 'api.watercontrol-dev.com'
-    user = FactoryGirl::create :user
+    @user = FactoryGirl::create :user
+    @condo = FactoryGirl::create :condo
+    @sector = create(:sector, user_id: @user.id)
+    @condo_id = @user.sectors.first.condo_id
   end
   test 'creates user with email and password' do
-    post '/webapp/users', { user:
+
+    post "/webapp/condos/#{@condo_id}/users", { user:
                             { name: 'User One',
                               rut: '15.316.349-9',
                               password: 'password',
@@ -28,15 +32,14 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
   end
 
   test 'list users' do
-    get '/webapp/users',{},{'Authorization' => token_header(@user.auth_token)}
+    get "/webapp/condos/#{@condo_id}/users",{},{'Authorization' => token_header(@user.auth_token)}
       assert_equal 200, response.status
       refute_empty response.body
       assert_equal User.count, json(response.body).count
     end
 
   test 'Retorna un usuario en particular con todas sus parcelas' do
-       user = FactoryGirl::create :user
-       get "/webapp/users/#{user.id}",{},'Authorization' => token_header(@user.auth_token)
+       get "/webapp/condos/#{@condo_id}/users/#{@user.id}",{},'Authorization' => token_header(@user.auth_token)
        assert_equal 200, response.status
   end
 

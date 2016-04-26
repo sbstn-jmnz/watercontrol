@@ -6,7 +6,7 @@ module Api::Webapp
         if user.save
           render json: user, status: 201, location: api_user_url(user[:id]), root: false
         else
-          render json: user.errors, status: :unprocessable_entity 
+          render json: user.errors, status: :unprocessable_entity
       end
     end
 
@@ -18,12 +18,13 @@ module Api::Webapp
     end
 
     def index
-      users = User.all
+      condo = Condo.find(params[:condo_id])
+      users = condo.users
       render json: users, status: 200, root: false
     end
 
     private
-    
+
       def user_params
         params.require(:user).permit(:name, :rut, :email, :password)
       end
