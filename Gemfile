@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5.2'
 gem 'rails-api'
 gem 'pg'
+gem 'rmagick'
 gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
