@@ -118,6 +118,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.1.2)
+    rmagick (2.15.2)
     ruby-graphviz (1.2.2)
     ruby-progressbar (1.7.5)
     sprockets (3.6.0)
@@ -148,4 +149,8 @@ DEPENDENCIES
   rails (= 4.2.5.2)
   rails-api
   rails-erd
+  rmagick
   tiny_tds
+
+BUNDLED WITH
+   1.11.2

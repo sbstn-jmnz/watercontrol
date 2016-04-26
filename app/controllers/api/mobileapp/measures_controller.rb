@@ -26,7 +26,7 @@ module Api::Mobileapp
     private
 
       def measure_params(measure)
-        measure.permit(:value, :comment, :id);
+        measure.permit(:value, :comment, :id, :user_id);
       end
 
   end

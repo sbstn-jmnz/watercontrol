@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425142456) do
+ActiveRecord::Schema.define(version: 20160425162450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160425142456) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "condo_id"
+    t.integer  "base_consumption"
   end
 
   add_index "charge_parameters", ["condo_id"], name: "index_charge_parameters_on_condo_id", using: :btree

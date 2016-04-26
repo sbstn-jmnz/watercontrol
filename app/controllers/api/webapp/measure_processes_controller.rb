@@ -12,9 +12,9 @@ module Api::Webapp
         process.status = MeasureProcess::STATUS.second
         process.closed_at = Time.now
         process.save
-        Invoice.create_invoices
+        # Invoice.create_invoices
       end
-      render json: process, status: 204
+      render json: {message: 'ok'}, status: 204
     end
 
     def create
@@ -32,15 +32,16 @@ module Api::Webapp
               value: 0,
               status: 'pending',
               user_id: User.where(role: 'user').take.id,
+              measure_process_id: process.id,
               meter_id: meter.id}
               )
             end
-            measures = Measure.where(measure_process_id: process.id, status: 'pending')
+           
             render json: {process_id: process.id}, status: 201, root: false
           end
         else
           render nothing: true, status: 422
-        end
+      end
     end
 
   private
