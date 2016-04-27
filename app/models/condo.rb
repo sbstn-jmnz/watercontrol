@@ -9,8 +9,8 @@ class Condo < ActiveRecord::Base
   def meters
     meters = []
     sectors.each do |sector|
-      sector.plots.each do |plot|
-        plot.meters.each do |meter|
+      sector.plots.where(status: Plot::STATUS.first).each do |plot|
+        plot.meters.where(status: Meter::STATUS.first).each do |meter|
           meters.push meter
         end
       end

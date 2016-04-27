@@ -2,81 +2,107 @@ class Invoice < ActiveRecord::Base
   establish_connection "#{Rails.env}_sales".to_sym
   belongs_to :owner
 
-  def create_invoices(condo_id)
+  def self.create_invoices(process_id, condo_id)
     
-    last_process_active = MeasureProcess.last
+    last_process_active = MeasureProcess.find(process_id)
 
-    meters_subject_to_invoice = [];
-
+    condo = Condo.find(condo_id)
     #Genera todas las facturas 
-    Condo.find(condo_id).sectors.each do |sector|
+    condo.meters.each do |meter|
 
-      sector.plots.each do |plot|
+      graph_data_array = []
+      
+      meters_for_year = meter.measures.last(12);
+      
+      meters_for_year.each_with_index do |measure, i|
         
-        plot.meters.each do |meter|
-
-          #Sin importar
-          meter.measures.where(:measure_process_id => last_process_active.id, )
-
-
-          end
-
+        if(i === meters_for_year.count - 1)
+         break
         end
 
+        graph_data = {
+          consumption: meters_for_year[i+1].value - measure.value,
+          created_at: meters_for_year[i+1].created_at,
+          month_label: meters_for_year[i+1].created_at.strftime("%b")
+        }
+
+        graph_data_array.push(graph_data)
+
+      end
+      
+      if(graph_data_array.count < 12)
+        
+        pivot_date = graph_data_array[0][:created_at]
+
+        (1..(12 - graph_data_array.count)).each do |n|
+          graph_data_array.unshift({
+            consumption: 0,
+            created_at: pivot_date - (n).month,
+            month_label: (pivot_date - (n).month).strftime("%b")
+          })
+        end
+      end
+
+      image = self.create_consumption_image(graph_data_array)
+      debugger;
+    end
+
+  end
 
 
+  def self.create_consumption_image(graph_data)
+    
+    canvas_width = 600
+    canvas_height = 400
+    bar_width = 40
+    bar_margin = 10
+    canvas_y_top = 350
+
+    canvas = Magick::Image.new(canvas_width, canvas_height)
+    canvas.background_color = 'white'
+
+    gc = Magick::Draw.new
+    
+    
+
+    #Dibuja el eje coordenado y título
+    gc.pointsize(24)
+    gc.text(canvas_width/2 - 100,20, 'Consumo últimos 12 meses')
+    
+    #Eje Y
+    gc.line(2,55, 5,50)
+    gc.line(5,50, 8,55)
+    gc.line(5,50 , 5,canvas_y_top)
+    
+    #Eje X
+    gc.line(5,canvas_y_top , canvas_width,canvas_y_top)
+
+
+    #Dibuja las barras por cada mes
+    gc.pointsize(12)
+    graph_data.each_with_index do |data, i|
+      x1Coord = bar_margin + (bar_width + bar_margin)*i
+      y1Coord = canvas_y_top - (data[:consumption].to_f/canvas_height)*100
+      x2Coord = x1Coord + bar_width
+      y2Coord = canvas_y_top
+      
+      gc.text(x1Coord + 10,y2Coord + 35, data[:month_label])
+
+      if data[:consumption] > 0
+        gc.rectangle(x1Coord, y1Coord,x2Coord, y2Coord)
+        gc.text(x1Coord + 10,y2Coord + 20, data[:consumption].to_s)
       end
 
     end
 
-    #@users = User.where(:created_at => start_date.to_time..end_date.to_time)
-
-
-    # self.image = create_consumption_image
-    
-    # self.save
-
-  end
-
-
-
-
-  def write_main_graph
-
-
-
-  end
-
-  def create_consumption_image
-    canvas = Magick::Image.new(800, 300){self.background_color = 'white'}      
-
-    gc = Magick::Draw.new
-    gc.pointsize(12)
-    
-    #x1,y1,x2,y2
-    gc.rectangle(30, 100, 70, 250)
-    gc.text(30,270, "Enero")
-    
-    gc.rectangle(80, 150, 120, 250)
-    gc.text(80,270, "Febrero")
-    
-    gc.rectangle(130, 120, 170, 250)
-    gc.text(130,270, "Marzo")
-    
-    gc.rectangle(180, 220, 220, 250)
-    gc.text(180,270, "Abril")
-    
-    gc.rectangle(230, 100, 270, 250)
-    gc.text(230,270, "Mayo")
-
+   
     gc.draw(canvas)
     
     canvas.write('tst.png')
-
     imageEncoded = Base64.strict_encode64(open('tst.png') { |io| io.read })
     
     return imageEncoded
-    end
+  end
 
 
 end
