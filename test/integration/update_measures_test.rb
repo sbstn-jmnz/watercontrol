@@ -4,14 +4,19 @@ class UpdateMeasuresTest < ActionDispatch::IntegrationTest
 
   setup do
     host! 'api.watercontrol-dev.com'
+    @measure_process_closed = create(:measure_process, status: 'closed')
     @measure_process = create(:measure_process); @user = create(:user)
     @sector = create(:sector, user_id: @user.id); @sector2 = create(:sector_2, user_id: @user.id)
     @plot = create(:plot, sector_id: @sector.id); @plot2 = create(:plot, sector_id: @sector2.id)
     @meter = create(:meter, plot_id: @plot.id); @meter2 = create(:meter, plot_id: @plot2.id)
+    @last_measure = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process_closed.id,
+                      status: 'ok',  value: 100)
+    @last_measure2 = create(:measure, meter_id: @meter2.id, user_id: @user.id, measure_process_id: @measure_process.closed.id,
+                      status: 'ok',  value: 101)
     @measure = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
                       status: 'pending',  value: 0)
     @measure2 = create(:measure, meter_id: @meter2.id, user_id: @user.id, measure_process_id: @measure_process.id,
-                      status: 'pending', value: 0)
+                      status: 'pending', value: 0)    
   end
 
   test 'Debe retornar una lista de las mediciones pendientes de sus sectores asignados' do
