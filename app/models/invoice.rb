@@ -22,10 +22,13 @@ class Invoice < ActiveRecord::Base
          break
         end
 
+        consumption = meters_for_year[i+1].value - measure.value;
+
         graph_data = {
-          consumption: meters_for_year[i+1].value - measure.value,
-          created_at: meters_for_year[i+1].created_at,
-          month_label: meters_for_year[i+1].created_at.strftime("%b")
+          consumption: consumption < 0 ? 0 
+                                       : consumption,
+          created_at: meters_for_year[i+1].updated_at,
+          month_label: meters_for_year[i+1].updated_at.strftime("%b")
         }
 
         graph_data_array.push(graph_data)
@@ -113,10 +116,11 @@ class Invoice < ActiveRecord::Base
    
     gc.draw(canvas)
     
-    canvas.write('consumption.png')
-    imageEncoded = Base64.strict_encode64(open('consumption.png') { |io| io.read })
+    canvas.write('consumption.png')      
+
+    # imageEncoded = Base64.strict_encode64(open('consumption.png') { |io| io.read })
     
-    return imageEncoded
+    return IO.binread(open('consumption.png'))
   end
 
 

@@ -57,14 +57,29 @@
 
 #Crea tres procesos de medicion dos pasados y cerrados y uno activo.
 MeasureProcess.create([
+
+  { fixed: 212, normal_price: 210, over_consumption_price: 180, status: MeasureProcess::STATUS.second,
+    created_at: Time.now.end_of_month - 6.months, closed_at: (Time.now.end_of_month - 6.months) + 24.hours,
+    updated_at: (Time.now.end_of_month - 6.months) + 24.hours  },
+
   { fixed: 234.45, normal_price: 250, over_consumption_price: 200, status: MeasureProcess::STATUS.second,
-   created_at: Time.now.end_of_month - 3.months, closed_at: (Time.now.end_of_month - 3.months) + 24.hours },
+    created_at: Time.now.end_of_month - 5.months, closed_at: (Time.now.end_of_month - 5.months) + 24.hours ,
+    updated_at: (Time.now.end_of_month - 5.months) + 24.hours },
+
+  { fixed: 234.45, normal_price: 250, over_consumption_price: 200, status: MeasureProcess::STATUS.second,
+    created_at: Time.now.end_of_month - 4.months, closed_at: (Time.now.end_of_month - 4.months) + 24.hours ,
+    updated_at: (Time.now.end_of_month - 4.months) + 24.hours },
+
+  { fixed: 234.45, normal_price: 250, over_consumption_price: 200, status: MeasureProcess::STATUS.second,
+    created_at: Time.now.end_of_month - 3.months, closed_at: (Time.now.end_of_month - 3.months) + 24.hours ,
+    updated_at: (Time.now.end_of_month - 3.months) + 24.hours },
 
   { fixed: 214.35, normal_price: 250, over_consumption_price: 220, status: MeasureProcess::STATUS.second,
-    created_at: Time.now.end_of_month - 2.months,  closed_at: (Time.now.end_of_month - 3.months) + 24.hours },
+    created_at: Time.now.end_of_month - 2.months,  closed_at: (Time.now.end_of_month - 2.months) + 24.hours ,
+    updated_at: (Time.now.end_of_month - 2.months) + 24.hours },
 
   { fixed: 202.25, normal_price: 200, over_consumption_price: 180, status: MeasureProcess::STATUS.first,
-    created_at: Time.now.end_of_month - 1.months, closed_at: (Time.now.end_of_month - 3.months) + 24.hours }])
+    created_at: Time.now.end_of_month - 1.months, closed_at: (Time.now.end_of_month - 1.months) + 24.hours }])
 
 #Crea 10 parcelas a cada sector con estado y duenos aleatorios
 
@@ -96,12 +111,33 @@ prob = [1,2,3,4]
 # Crea mediciones a los medidores activos
     Meter.all.each do |meter|
       if meter.status == Meter::STATUS.first
-        MeasureProcess.all.each do |process|
-          i = 1
+        i = 1
+        processes = MeasureProcess.all
+        
+        processes.each do |process| 
           if process.status == MeasureProcess::STATUS.second #Proceso cerrado
-            Measure.create( comment: 'blah blah', meter_id: meter.id, status: Measure::STATUS.third, user_id: User.last.id,
-            value: 100*i, measure_process_id: process.id )
-            i += i
+            
+            # debugger;
+
+            Measure.create( 
+              comment: 'blah blah', 
+              meter_id: meter.id, 
+              status: Measure::STATUS.third, 
+              user_id: User.last.id,
+              value: (100 + Random.rand(200))*i, 
+              measure_process_id: process.id, 
+              created_at: (Time.now - (processes.count - i).months), 
+              updated_at: (Time.now - (processes.count - i).months)
+            )
+            
+            # puts "*********************************************************************************************"
+            # puts " For meter_id: " +  meter.id.to_s
+            # puts " Time now: " + (Time.now).to_s + " | Months substracted: " + (processes.count - i).to_s 
+            # puts " Result: " +  (Time.now - (processes.count - i).months).to_s
+            # puts "*********************************************************************************************"
+            
+
+            i += 1
           else
             Measure.create( comment: 'blah blah', meter_id: meter.id, status: Measure::STATUS.first, user_id: User.last.id,
             value: 0, measure_process_id: process.id )

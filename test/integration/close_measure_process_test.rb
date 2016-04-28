@@ -21,17 +21,17 @@ class CloseMeasureProcessTest < ActionDispatch::IntegrationTest
     @meter2 = create(:meter, plot_id: @plot2.id)
     
     @measure = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
-                      status: 'pending',  value: 1026, created_at: Time.now - 6.month)
+                      status: 'pending',  value: 1026, updated_at: Time.now - 6.month)
     @measure2 = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
-                      status: 'pending',  value: 1250, created_at: Time.now - 5.month)
+                      status: 'pending',  value: 1250, updated_at: Time.now - 5.month)
     @measure3 = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
-                      status: 'pending',  value: 1410, created_at: Time.now - 4.month)
+                      status: 'pending',  value: 1410, updated_at: Time.now - 4.month)
     @measure4 = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
-                      status: 'pending',  value: 1820, created_at: Time.now - 3.month)
+                      status: 'pending',  value: 1820, updated_at: Time.now - 3.month)
     @measure5 = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
-                      status: 'pending',  value: 1900, created_at: Time.now - 2.month)
+                      status: 'pending',  value: 1900, updated_at: Time.now - 2.month)
     @measure6 = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
-                      status: 'pending',  value: 2030, created_at: Time.now - 1.month)
+                      status: 'pending',  value: 2030, updated_at: Time.now - 1.month)
 
     @measure7 = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
                       status: 'pending',  value: 2090)

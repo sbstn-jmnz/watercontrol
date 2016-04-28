@@ -16,7 +16,7 @@ module Api::Webapp
         process.save
         
         #Una vez cerrado 
-        Invoice.create_invoices(params[:id], params[:condo_id])
+        # Invoice.create_invoices(params[:id], params[:condo_id])
       
       end
       render json: {message: 'ok'}, status: 204
