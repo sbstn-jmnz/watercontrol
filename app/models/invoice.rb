@@ -1,17 +1,19 @@
 class Invoice < ActiveRecord::Base
+  
+  require 'FileUtils'
+
   establish_connection "#{Rails.env}_sales".to_sym
   belongs_to :owner
 
   def self.create_invoices(process_id, condo_id)
     
-    last_process_active = MeasureProcess.find(process_id)
-
     condo = Condo.find(condo_id)
+    process = MeasureProcess.find(process_id)
     #Genera todas las facturas 
     condo.meters.each do |meter|
 
-      graph_data_array = []
-      
+      #########  Generar una imagen del consumo de últimos 12 meses por medidor  ###############
+      graph_data_array = [] 
       meters_for_year = meter.measures.last(12);
       
       meters_for_year.each_with_index do |measure, i|
@@ -27,9 +29,9 @@ class Invoice < ActiveRecord::Base
         }
 
         graph_data_array.push(graph_data)
-
       end
       
+      #Si no se han generado 12 muestras, rellenar con consumo 0 
       if(graph_data_array.count < 12)
         
         pivot_date = graph_data_array[0][:created_at]
@@ -44,8 +46,21 @@ class Invoice < ActiveRecord::Base
       end
 
       image = self.create_consumption_image(graph_data_array)
-      debugger;
+      #################################################################################
+
+      invoice = self.new;
+
+      # invoice.base_consumption = process.base_consumption;
+      invoice.over_consumption_price = process.over_consumption_price;
+      invoice.normal_price = process.normal_price;
+      invoice.fixed_price = process.fixed;
+      invoice.image = image;
+
+      invoice.save;
     end
+
+    #Después de generar todas las imagenes, borrar el archivo usado como "pivote" para guardar las imagenes generadas
+    FileUtils.rm('consumption.png')
 
   end
 
@@ -67,7 +82,7 @@ class Invoice < ActiveRecord::Base
 
     #Dibuja el eje coordenado y título
     gc.pointsize(24)
-    gc.text(canvas_width/2 - 100,20, 'Consumo últimos 12 meses')
+    gc.text(canvas_width/2 - 100,20, "Consumo últimos 12 meses")
     
     #Eje Y
     gc.line(2,55, 5,50)
@@ -98,8 +113,8 @@ class Invoice < ActiveRecord::Base
    
     gc.draw(canvas)
     
-    canvas.write('tst.png')
-    imageEncoded = Base64.strict_encode64(open('tst.png') { |io| io.read })
+    canvas.write('consumption.png')
+    imageEncoded = Base64.strict_encode64(open('consumption.png') { |io| io.read })
     
     return imageEncoded
   end
