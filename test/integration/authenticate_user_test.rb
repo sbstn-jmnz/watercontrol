@@ -25,7 +25,7 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
   end
 
   test 'sign_in_admin' do
-    admin = FactoryGirl::create :admin
+    admin = create :admin
     post '/webapp/sessions',{ email: admin.email, password: 'secretcodeadmin' }.to_json, {'Accept' => Mime::JSON,
       'Content-Type'=> Mime::JSON.to_s}
     assert_equal 201, response.status

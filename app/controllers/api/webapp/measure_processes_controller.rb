@@ -8,11 +8,16 @@ module Api::Webapp
 
     def close
       process = MeasureProcess.find(params[:id])
+      
       if process
+        
         process.status = MeasureProcess::STATUS.second
         process.closed_at = Time.now
         process.save
-        # Invoice.create_invoices
+        
+        #Una vez cerrado 
+        # Invoice.create_invoices(params[:id], params[:condo_id])
+      
       end
       render json: {message: 'ok'}, status: 204
     end
@@ -28,15 +33,16 @@ module Api::Webapp
             status: MeasureProcess::STATUS.first
             })
             condo.meters.each do |meter|
-              Measure.create!({
+              measure = Measure.new({
               value: 0,
               status: 'pending',
               user_id: User.where(role: 'user').take.id,
               measure_process_id: process.id,
               meter_id: meter.id}
               )
+              measure.save(validate: false)
             end
-           
+
             render json: {process_id: process.id}, status: 201, root: false
           end
         else

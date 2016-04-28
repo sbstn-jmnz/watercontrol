@@ -4,5 +4,5 @@ class PurchaseOrderDetail < ActiveRecord::Base
   self.primary_key = "idDetalleNP"
 
   belongs_to :purchase_order
-  has_many :purchase_order_details
+  
 end

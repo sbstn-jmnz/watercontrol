@@ -5,4 +5,5 @@ class PurchaseOrder < ActiveRecord::Base
 
   belongs_to :invoice
   has_many :purchase_order_details
+
 end

@@ -41,6 +41,14 @@ test:
   <<: *default
   database: water_test
 
+test_sales:
+  adapter: sqlserver
+  database: BaseVenta
+  username: sa
+  password: c@bu12345
+  dataserver: '192.168.0.37\TEST'
+  timeout: 2000
+
 production:
   <<: *default
   database: water_production
