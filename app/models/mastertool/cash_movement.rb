@@ -1,11 +1,10 @@
-class SalesJournal < ActiveRecord::Base
+class CashMovement < ActiveRecord::Base
   establish_connection "#{Rails.env}_sales_database".to_sym
-  self.table_name = "LibroVenta"
-  self.primary_key = "idLibroVenta"
+  self.table_name = "MovimientoCaja"
+  self.primary_key = "idMvtoCaja"
 
-  has_many :sales_journal_details
-  has_one :purchase_order_document
-  has_one :cash_movement
-  has_one :dte_queue, foreign_key: 'idLibro'
-  has_one :purchase_order_electronic
+  belongs_to :purchase_order
+  belongs_to :sales_journal
+  has_one :customer_account_payment
+  has_one :cash_movement_payment_method
 end

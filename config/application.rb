@@ -5,10 +5,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Watercontrol
-  Rails.application.routes.default_url_options = { host: 'example.com' }
-  Rails.application.config.autoload_paths += Dir[Rails.root.join('app', 'models', '{*/}')]
-
-  class Application < Rails::Application
+    class Application < Rails::Application
     config.active_record.raise_in_transactional_callbacks = true
     config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
         allow do
@@ -26,5 +23,7 @@ module Watercontrol
             :max_age => 0
           end
         end
+        Rails.application.routes.default_url_options = { host: 'example.com' }
+        Rails.application.config.autoload_paths += Dir[Rails.root.join('app', 'models', '{*/}')]
       end
 end
