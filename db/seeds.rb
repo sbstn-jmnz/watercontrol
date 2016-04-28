@@ -27,10 +27,10 @@
                             { fixed: 1500, normal_price: 130, over_consumption_price: 190, condo_id: Condo.second.id}])
 
   #Crea los usuarios de la aplicacion mobile
-    User.create([{ name: 'User1', rut: '15.316.349-9', role: User::ROLE.first, email: 'info1@mastertool.cl', password:'secretcode1' },
-                 { name: 'User2',rut: '16.299.222-8',role: User::ROLE.first, email: 'info2@mastertool.cl', password: 'secretcode2'},
-                 { name: 'User3',rut: '2.299.222-2',role: User::ROLE.first, email: 'info3@mastertool.cl', password: 'secretcode3'},
-                 { name: 'User4',rut: '1.111.111-1',role: User::ROLE.first, email: 'info4@mastertool.cl', password: 'secretcode4'}])
+    User.create([{ name: 'User1', rut: '15.316.349-9', email: 'info1@mastertool.cl', password:'secretcode1' },
+                 { name: 'User2',rut: '16.299.222-8', email: 'info2@mastertool.cl', password: 'secretcode2'},
+                 { name: 'User3',rut: '2.299.222-2', email: 'info3@mastertool.cl', password: 'secretcode3'},
+                 { name: 'User4',rut: '1.111.111-1', email: 'info4@mastertool.cl', password: 'secretcode4'}])
 
   #Crea 6 sectores a cada condominio, dos sectores por usuario de aplicacion mobile
     Sector.create([{ name: 'Las Palmas', condo_id: Condo.first.id, user_id: User.first.id },
@@ -113,29 +113,29 @@ prob = [1,2,3,4]
       if meter.status == Meter::STATUS.first
         i = 1
         processes = MeasureProcess.all
-        
-        processes.each do |process| 
+
+        processes.each do |process|
           if process.status == MeasureProcess::STATUS.second #Proceso cerrado
-            
+
             # debugger;
 
-            Measure.create( 
-              comment: 'blah blah', 
-              meter_id: meter.id, 
-              status: Measure::STATUS.third, 
+            Measure.create(
+              comment: 'blah blah',
+              meter_id: meter.id,
+              status: Measure::STATUS.third,
               user_id: User.last.id,
-              value: (100 + Random.rand(200))*i, 
-              measure_process_id: process.id, 
-              created_at: (Time.now - (processes.count - i).months), 
+              value: (100 + Random.rand(200))*i,
+              measure_process_id: process.id,
+              created_at: (Time.now - (processes.count - i).months),
               updated_at: (Time.now - (processes.count - i).months)
             )
-            
+
             # puts "*********************************************************************************************"
             # puts " For meter_id: " +  meter.id.to_s
-            # puts " Time now: " + (Time.now).to_s + " | Months substracted: " + (processes.count - i).to_s 
+            # puts " Time now: " + (Time.now).to_s + " | Months substracted: " + (processes.count - i).to_s
             # puts " Result: " +  (Time.now - (processes.count - i).months).to_s
             # puts "*********************************************************************************************"
-            
+
 
             i += 1
           else
