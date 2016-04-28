@@ -1,5 +1,5 @@
 class DteQueue < ActiveRecord::Base
-  establish_connection "#{Rails.env}_sales_database".to_sym
+  establish_connection "#{Rails.env}_account_holders".to_sym
   self.table_name = "DTECola"
   self.primary_key = "idDTECola"
 

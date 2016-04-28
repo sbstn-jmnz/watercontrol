@@ -11,12 +11,12 @@ class UpdateMeasuresTest < ActionDispatch::IntegrationTest
     @meter = create(:meter, plot_id: @plot.id); @meter2 = create(:meter, plot_id: @plot2.id)
     @last_measure = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process_closed.id,
                       status: 'ok',  value: 100)
-    @last_measure2 = create(:measure, meter_id: @meter2.id, user_id: @user.id, measure_process_id: @measure_process.closed.id,
+    @last_measure2 = create(:measure, meter_id: @meter2.id, user_id: @user.id, measure_process_id: @measure_process_closed.id,
                       status: 'ok',  value: 101)
-    @measure = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
+    @measure = create(:measure_from_admin, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process.id,
                       status: 'pending',  value: 0)
-    @measure2 = create(:measure, meter_id: @meter2.id, user_id: @user.id, measure_process_id: @measure_process.id,
-                      status: 'pending', value: 0)    
+    @measure2 = create(:measure_from_admin, meter_id: @meter2.id, user_id: @user.id, measure_process_id: @measure_process.id,
+                      status: 'pending', value: 0)
   end
 
   test 'Debe retornar una lista de las mediciones pendientes de sus sectores asignados' do
@@ -34,7 +34,7 @@ class UpdateMeasuresTest < ActionDispatch::IntegrationTest
       :measures => [{
         id: @measure.id,
         comment: 'Medición mes mayo',
-        value: 100,
+        value: 200,
         },
       {
         id: @measure2.id,
@@ -46,7 +46,7 @@ class UpdateMeasuresTest < ActionDispatch::IntegrationTest
     put '/mobileapp/measures', measureHash.to_json, create_headers
 
     assert_equal 204, response.status
-    assert_equal Measure.find(@measure.id).value, 100
+    assert_equal Measure.find(@measure.id).value, 200
     assert_equal Measure.find(@measure.id).status, 'ok'
     assert_equal Measure.find(@measure2.id).value, 201
     assert_equal Measure.find(@measure2.id).status, 'ok'
