@@ -18,8 +18,7 @@ module Api::Webapp
     end
 
     def index
-      condo = Condo.find(params[:condo_id])
-      users = condo.users
+      users = User.where(condo_id: params[:condo_id])
       render json: users, status: 200, root: false
     end
 
