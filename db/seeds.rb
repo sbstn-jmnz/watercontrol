@@ -27,10 +27,10 @@
                             { fixed: 1500, normal_price: 130, over_consumption_price: 190, condo_id: Condo.second.id}])
 
   #Crea los usuarios de la aplicacion mobile
-    User.create([{ name: 'User1', rut: '15.316.349-9', email: 'info1@mastertool.cl', password:'secretcode1' },
-                 { name: 'User2',rut: '16.299.222-8', email: 'info2@mastertool.cl', password: 'secretcode2'},
-                 { name: 'User3',rut: '2.299.222-2', email: 'info3@mastertool.cl', password: 'secretcode3'},
-                 { name: 'User4',rut: '1.111.111-1', email: 'info4@mastertool.cl', password: 'secretcode4'}])
+    User.create([{ name: 'User1', rut: '15.316.349-9', email: 'info1@mastertool.cl', password:'secretcode1', condo_id: Condo.first.id },
+                 { name: 'User2',rut: '16.299.222-8', email: 'info2@mastertool.cl', password: 'secretcode2',condo_id: Condo.first.id},
+                 { name: 'User3',rut: '2.299.222-2', email: 'info3@mastertool.cl', password: 'secretcode3',condo_id: Condo.second.id},
+                 { name: 'User4',rut: '1.111.111-1', email: 'info4@mastertool.cl', password: 'secretcode4',condo_id: Condo.second.id}])
 
   #Crea 6 sectores a cada condominio, dos sectores por usuario de aplicacion mobile
     Sector.create([{ name: 'Las Palmas', condo_id: Condo.first.id, user_id: User.first.id },
