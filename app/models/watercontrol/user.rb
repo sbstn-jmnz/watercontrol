@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-ROLE = %w{ user }
 
   has_many :measures
   has_many :sectors
+  belongs_to :condo
 
   validates :auth_token, uniqueness: true
   validates :name, :email, :password, :rut, presence: true

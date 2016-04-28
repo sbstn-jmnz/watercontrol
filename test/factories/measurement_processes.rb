@@ -9,7 +9,6 @@ FactoryGirl.define do
     rut "MyString"
     email 'info@mastertool.cl'
     password 'secretcode'
-    role User::ROLE.third
   end
 
   factory :condo do

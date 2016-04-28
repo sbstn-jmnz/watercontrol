@@ -26,7 +26,7 @@ module Api::Webapp
     private
 
       def user_params
-        params.require(:user).permit(:name, :rut, :email, :password)
+        params.require(:user).permit(:name, :rut, :email, :password, :condo_id)
       end
 
     end
