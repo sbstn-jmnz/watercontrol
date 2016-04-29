@@ -1,6 +1,6 @@
 class Meter < ActiveRecord::Base
   STATUS = %w{ active inactive }
-  
+
   belongs_to :plot
   has_many :measures
 
@@ -19,6 +19,9 @@ class Meter < ActiveRecord::Base
                                   users.name as last_measurer").last
   end
 
+  def idCorrentista
+    plot.owner.account_holder.idCorrentista #Penditene la conexion segura de correntistas con owner
+  end
 
 
   Meter::STATUS.each do |status|
