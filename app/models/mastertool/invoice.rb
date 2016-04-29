@@ -1,42 +1,32 @@
 class Invoice < ActiveRecord::Base
-  require 'FileUtils'
+  require 'fileutils'
   establish_connection "#{Rails.env}_sales_database".to_sym
   belongs_to :owner
 
   def self.create_invoices(process_id, condo_id)
-
     condo = Condo.find(condo_id)
     process = MeasureProcess.find(process_id)
     #Genera todas las facturas
     condo.meters.each do |meter|
-
       #########  Generar una imagen del consumo de últimos 12 meses por medidor  ###############
       graph_data_array = []
-      meters_for_year = meter.measures.last(12);
-
-      meters_for_year.each_with_index do |measure, i|
-
-        if(i === meters_for_year.count - 1)
+      measures_for_year = meter.measures.last(12);
+      measures_for_year.each_with_index do |measure, i|
+        if(i === measures_for_year.count - 1)
          break
         end
-
-        consumption = meters_for_year[i+1].value - measure.value;
-
+        consumption = measures_for_year[i+1].value - measure.value;
         graph_data = {
-          consumption: consumption < 0 ? 0
-                                       : consumption,
-          created_at: meters_for_year[i+1].updated_at,
-          month_label: meters_for_year[i+1].updated_at.strftime("%b")
+          consumption: consumption < 0 ? 0 : consumption,
+          created_at: measures_for_year[i+1].updated_at,
+          month_label: measures_for_year[i+1].updated_at.strftime("%b")
         }
-
         graph_data_array.push(graph_data)
       end
 
       #Si no se han generado 12 muestras, rellenar con consumo 0
       if(graph_data_array.count < 12)
-
         pivot_date = graph_data_array[0][:created_at]
-
         (1..(12 - graph_data_array.count)).each do |n|
           graph_data_array.unshift({
             consumption: 0,
@@ -45,26 +35,33 @@ class Invoice < ActiveRecord::Base
           })
         end
       end
-
       image = self.create_consumption_image(graph_data_array)
-      #################################################################################
-
+      #########################################################################
       invoice = self.new;
-
-      # invoice.base_consumption = process.base_consumption;
-      invoice.over_consumption_price = process.over_consumption_price;
-      invoice.normal_price = process.normal_price;
-      invoice.fixed_price = process.fixed;
+      invoice.base_consumption = 1680 #preguntar
+      invoice.current_value = measures_for_year.last.value
+      invoice.last_value = measures_for_year[-2].value
+      invoice.due_date = process.created_at + 1.month
+      invoice.fixed_price = process.fixed
+      invoice.idCorrentista = meter.idCorrentista
       invoice.image = image;
-
+      invoice.last_invoice_date = invoice.set_last_invoice_date(measures_for_year[-2].measure_process_id)
+      invoice.meter_number = meter.number
+      invoice.normal_limit = 300 #definir la funcion del limite de consumo normal
+      invoice.normal_price = process.normal_price;
+      invoice.plot_number = meter.plot.plot_number
+      invoice.over_consumption_price = process.over_consumption_price
       invoice.save;
     end
 
     #Después de generar todas las imagenes, borrar el archivo usado como "pivote" para guardar las imagenes generadas
-    FileUtils.rm('consumption.png')
+    FileUtils.rm('consumption.png') if File.file?('consumption.png')
 
   end
 
+  def set_last_invoice_date(process_id)
+    return MeasureProcess.find(process_id).closed_at
+  end
 
   def self.create_consumption_image(graph_data)
 
@@ -114,13 +111,13 @@ class Invoice < ActiveRecord::Base
     canvas.write('consumption.png')
 
     # imageEncoded = Base64.strict_encode64(open('consumption.png') { |io| io.read })
-    
+
     # puts "*********************************"
     # puts  imageEncoded
     # puts "*********************************"
-    
+
     # return imageEncoded
-    
+
     return IO.binread(open('consumption.png'))
 
   end

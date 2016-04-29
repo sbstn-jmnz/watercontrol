@@ -113,12 +113,8 @@ prob = [1,2,3,4]
       if meter.status == Meter::STATUS.first
         i = 1
         processes = MeasureProcess.all
-
         processes.each do |process|
           if process.status == MeasureProcess::STATUS.second #Proceso cerrado
-
-            # debugger;
-
             Measure.create(
               comment: 'blah blah',
               meter_id: meter.id,
@@ -129,19 +125,16 @@ prob = [1,2,3,4]
               created_at: (Time.now - (processes.count - i).months),
               updated_at: (Time.now - (processes.count - i).months)
             )
-
-            # puts "*********************************************************************************************"
-            # puts " For meter_id: " +  meter.id.to_s
-            # puts " Time now: " + (Time.now).to_s + " | Months substracted: " + (processes.count - i).to_s
-            # puts " Result: " +  (Time.now - (processes.count - i).months).to_s
-            # puts "*********************************************************************************************"
-
-
             i += 1
           else
-            Measure.create( comment: 'blah blah', meter_id: meter.id, status: Measure::STATUS.first, user_id: User.last.id,
+            m = Measure.new( comment: 'blah blah', meter_id: meter.id, status: Measure::STATUS.first, user_id: User.last.id,
             value: 0, measure_process_id: process.id )
+            m.save(validate: false)
           end
         end
       end
     end
+
+  MeasureProcess.where(status: MeasureProcess::STATUS.second).each do |process|
+
+  end
