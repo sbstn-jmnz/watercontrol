@@ -118,9 +118,14 @@ class Invoice < ActiveRecord::Base
     
     canvas.write('consumption.png')      
 
-    # imageEncoded = Base64.strict_encode64(open('consumption.png') { |io| io.read })
+    imageEncoded = Base64.strict_encode64(open('consumption.png') { |io| io.read })
     
-    return IO.binread(open('consumption.png'))
+    puts "*********************************"
+    puts  imageEncoded
+    puts "*********************************"
+    
+    return imageEncoded
+    # return IO.binread(open('consumption.png'))
   end
 
 
