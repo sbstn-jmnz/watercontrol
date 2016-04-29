@@ -9,7 +9,6 @@ FactoryGirl.define do
     rut "MyString"
     email 'info@mastertool.cl'
     password 'secretcode'
-    role User::ROLE.third
   end
 
   factory :condo do
@@ -74,13 +73,15 @@ FactoryGirl.define do
     measure_process
   end
 
+  factory :measure_from_admin, class: Measure do
+    to_create {|instance| instance.save(validate: false)}
+  end
+
   factory :admin do
       auth_token "MyString"
       name "MyString"
       rut "MyString"
       email 'infoadmin@mastertool.cl'
       password 'secretcodeadmin'
-      condos {[FactoryGirl.build(:condo)] }
     end
-
 end

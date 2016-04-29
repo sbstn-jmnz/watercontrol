@@ -33,15 +33,16 @@ module Api::Webapp
             status: MeasureProcess::STATUS.first
             })
             condo.meters.each do |meter|
-              Measure.create!({
+              measure = Measure.new({
               value: 0,
               status: 'pending',
               user_id: User.where(role: 'user').take.id,
               measure_process_id: process.id,
               meter_id: meter.id}
               )
+              measure.save(validate: false)
             end
-           
+
             render json: {process_id: process.id}, status: 201, root: false
           end
         else

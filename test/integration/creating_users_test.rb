@@ -4,11 +4,12 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
 
   setup do
     host! 'api.watercontrol-dev.com'
-    @user = FactoryGirl::create :user
     @condo = FactoryGirl::create :condo
+    @user = FactoryGirl::create :user, condo_id: @condo.id
     @sector = create(:sector, user_id: @user.id, condo_id: @condo.id)
     @condo_id = @user.sectors.first.condo_id
   end
+
   test 'creates user with email and password' do
 
     post "/webapp/condos/#{@condo_id}/users", { user:
