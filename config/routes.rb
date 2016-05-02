@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-
     namespace :api, path: '/webapp' do
       scope module: 'webapp' do
         resources :condos, only: [:index, :show] do
           resources :measure_processes, only: [:index, :show, :create] do
             match 'close', :on => :member, :via => [:post]
-
           end
           resources :charge_parameters, only: [:index] do
             collection do
@@ -13,10 +11,10 @@ Rails.application.routes.draw do
             end
           end
           resources :sectors , only: [:show, :index]
-          put 'sectors', :controller => 'sectors', :action => 'update'
+          resources :plots, only: [:update, :index] 
           resources :users, only: [:show, :create, :index]
+          put 'sectors', :controller => 'sectors', :action => 'update'
         end
-        #resources :plots, only: [:show]
         resources :meters, only: [:show]
         resources :sessions, only: [:create]
     end

@@ -26,9 +26,6 @@ class CreateMeasurementProcess < ActionDispatch::IntegrationTest
 
   end
 
-  test 'No debe crear proceso si hay uno pendiente' do
-
-  end
 
 
 end

@@ -10,8 +10,6 @@ class Plot < ActiveRecord::Base
   validates_associated :sector
   validates_associated :owner
 
-
-
   STATUS.each do |status|
     define_method("#{status}?") do
       self.status == status

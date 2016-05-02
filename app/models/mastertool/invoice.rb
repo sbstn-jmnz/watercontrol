@@ -75,52 +75,31 @@ class Invoice < ActiveRecord::Base
     canvas.background_color = 'white'
 
     gc = Magick::Draw.new
-
     #Dibuja el eje coordenado y título
     gc.pointsize(24)
     gc.text(canvas_width/2 - 100,20, "Consumo últimos 12 meses")
-
     #Eje Y
     gc.line(2,55, 5,50)
     gc.line(5,50, 8,55)
     gc.line(5,50 , 5,canvas_y_top)
-
     #Eje X
     gc.line(5,canvas_y_top , canvas_width,canvas_y_top)
-
-
     #Dibuja las barras por cada mes
     gc.pointsize(12)
+
     graph_data.each_with_index do |data, i|
       x1Coord = bar_margin + (bar_width + bar_margin)*i
       y1Coord = canvas_y_top - (data[:consumption].to_f/canvas_height)*100
       x2Coord = x1Coord + bar_width
       y2Coord = canvas_y_top
-
       gc.text(x1Coord + 10,y2Coord + 35, data[:month_label])
-
       if data[:consumption] > 0
         gc.rectangle(x1Coord, y1Coord,x2Coord, y2Coord)
         gc.text(x1Coord + 10,y2Coord + 20, data[:consumption].to_s)
       end
-
     end
-
     gc.draw(canvas)
-
     canvas.write('consumption.png')
-
-    # imageEncoded = Base64.strict_encode64(open('consumption.png') { |io| io.read })
-
-    # puts "*********************************"
-    # puts  imageEncoded
-    # puts "*********************************"
-
-    # return imageEncoded
-
     return IO.binread(open('consumption.png'))
-
   end
-
-
 end
