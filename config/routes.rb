@@ -11,14 +11,9 @@ Rails.application.routes.draw do
             end
           end
           resources :sectors , only: [:show, :index]
-<<<<<<< HEAD
-          resources :plots, only: [:update, :index] 
+          resources :plots, only: [:update, :index]
           resources :users, only: [:show, :create, :index]
           put 'sectors', :controller => 'sectors', :action => 'update'
-=======
-          put 'sectors', :controller => 'sectors', :action => 'update'
-          resources :users, only: [:show, :create, :index, :update]
->>>>>>> alejandro
         end
         resources :meters, only: [:show]
         resources :sessions, only: [:create]
