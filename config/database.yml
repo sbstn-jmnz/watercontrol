@@ -30,6 +30,9 @@ development_sales:
 development:
   <<: *default
   database: water_development
+  username: postgres
+  password: 
+  host: db
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

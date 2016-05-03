@@ -44,4 +44,16 @@ class CreatingUsersTest < ActionDispatch::IntegrationTest
        assert_equal 200, response.status
   end
 
+  test 'updates user' do
+    patch "/webapp/condos/#{@condo_id}/users/#{@user.id}",{ user:
+                            { name: 'User One',
+                              rut: '15.316.349-9',
+                              password: 'password',
+                              password_confirm: 'password',
+                              email: 'info@mastertool.cl'
+                            }
+                          },'Authorization' => token_header(@user.auth_token)
+    assert_equal 200, response.status
+  end
+
 end

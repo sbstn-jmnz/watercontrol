@@ -11,15 +11,19 @@ Rails.application.routes.draw do
             end
           end
           resources :sectors , only: [:show, :index]
+<<<<<<< HEAD
           resources :plots, only: [:update, :index] 
           resources :users, only: [:show, :create, :index]
           put 'sectors', :controller => 'sectors', :action => 'update'
+=======
+          put 'sectors', :controller => 'sectors', :action => 'update'
+          resources :users, only: [:show, :create, :index, :update]
+>>>>>>> alejandro
         end
         resources :meters, only: [:show]
         resources :sessions, only: [:create]
     end
   end
-
   namespace :api, path: '/mobileapp' do
     scope module: 'mobileapp' do
       resources :users, only: [:show] do
@@ -29,8 +33,6 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create]
     end
   end
-
   root :controller => 'static', :action => '/public/index.html'
   get '*path' => 'application#index'
-
 end
