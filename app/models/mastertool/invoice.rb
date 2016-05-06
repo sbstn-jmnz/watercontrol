@@ -3,7 +3,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :owner
   has_one :purchase_order
 
-  validates :base_consumption, :current_value, :fixed_price, :idCorrentista, :last_value
+  validates :base_consumption, :current_value, :fixed_price, :idCorrentista, :last_value,
             :normal_limit, :normal_price, :over_consumption_price, numericality: true
 
   validates  :base_consumption, :current_value, :due_date, :fixed_price, :idCorrentista,

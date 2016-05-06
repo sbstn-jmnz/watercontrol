@@ -33,7 +33,7 @@ module Api::Webapp
               measure = Measure.new({
               value: 0,
               status: 'pending',
-              user_id: User.where(role: 'user').take.id,
+              user_id: User.take.id,
               measure_process_id: process.id,
               meter_id: meter.id}
               )
