@@ -1,4 +1,4 @@
-class Meter < ActiveRecord::Base
+	class Meter < ActiveRecord::Base
   STATUS = %w{ active inactive }
 
   belongs_to :plot
