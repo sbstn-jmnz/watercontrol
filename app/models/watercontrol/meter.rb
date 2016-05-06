@@ -1,4 +1,4 @@
-class Meter < ActiveRecord::Base
+	class Meter < ActiveRecord::Base
   STATUS = %w{ active inactive }
 
   belongs_to :plot
@@ -74,6 +74,7 @@ class Meter < ActiveRecord::Base
           })
       end
    end
+ end
 
   Meter::STATUS.each do |status|
     define_method("#{status}?") do
