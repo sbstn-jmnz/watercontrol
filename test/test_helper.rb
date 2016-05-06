@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start 'rails'
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../../config/environment', __FILE__)
@@ -23,14 +25,14 @@ class ActiveSupport::TestCase
   end
 
   def create_headers
-    
+
     user = FactoryGirl::create :user
-    
-    { 'Accept' => Mime::JSON, 
+
+    { 'Accept' => Mime::JSON,
       'Content-Type'=> Mime::JSON.to_s,
       'Authorization' => token_header(user.auth_token)
     }
   end
-  
+
 
 end

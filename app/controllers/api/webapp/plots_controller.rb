@@ -3,7 +3,7 @@ module Api::Webapp
       def index
         condo = Condo.find(params[:condo_id])
         plots = condo.plots
-        render json: plots, status: 200, serializer: ActiveModel::Serializer::ArraySerializer,
+        render json: plots, status: 201, serializer: ActiveModel::Serializer::CollectionSerializer,
         each_serializer: Plots::PlotSerializer
       end
 
@@ -15,7 +15,7 @@ module Api::Webapp
       end
 
       def update
-
+        
       end
 
   end

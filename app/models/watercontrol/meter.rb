@@ -23,6 +23,9 @@ class Meter < ActiveRecord::Base
     plot.owner.account_holder.idCorrentista #Penditene la conexion segura de correntistas con owner
   end
 
+  def last_twelve_measures
+    measures.last(12)
+  end
 
   Meter::STATUS.each do |status|
     define_method("#{status}?") do

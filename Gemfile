@@ -4,13 +4,14 @@ gem 'rails-api'
 gem 'pg'
 gem 'rmagick'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'roo', '~> 2.3.2' #imports xls
 
 group :development, :test do
     gem "factory_girl_rails", "~> 4.0"
     gem "rails-erd"
     gem "byebug"
 end
-
+gem 'simplecov', :require => false, :group => :test
 gem 'minitest-reporters', group: :test
 
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers'

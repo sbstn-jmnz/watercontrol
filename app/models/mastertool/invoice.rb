@@ -2,6 +2,17 @@ class Invoice < ActiveRecord::Base
   require 'fileutils'
   establish_connection "#{Rails.env}_sales_database".to_sym
   belongs_to :owner
+  has_one :purchase_order
+
+  validates :base_consumption, :current_value, :fixed_price, :idCorrentista, :last_value
+            :normal_limit, :normal_price, :over_consumption_price, numericality: true
+
+  validates  :base_consumption, :current_value, :due_date, :fixed_price, :idCorrentista,
+             :image, :last_invoice_date, :last_value, :meter_number, :normal_limit, :normal_price,
+             :over_consumption_price, presence: true
+
+  validates :owner, presence: true
+
 
   def self.create_invoices(process_id, condo_id)
     condo = Condo.find(condo_id)
@@ -10,7 +21,7 @@ class Invoice < ActiveRecord::Base
     condo.meters.each do |meter|
       #########  Generar una imagen del consumo de últimos 12 meses por medidor  ###############
       graph_data_array = []
-      measures_for_year = meter.measures.last(12);
+      measures_for_year = meter.last_twelve_measures
       measures_for_year.each_with_index do |measure, i|
         if(i === measures_for_year.count - 1)
          break

@@ -11,9 +11,9 @@ class UpdatePlots < ActionDispatch::IntegrationTest
 
   test 'Debe traer lista de parcelas por condominio' do
     get "/webapp/condos/#{@condo.id}/plots",{},create_headers
-    
+
     assert_equal 201, response.status
-    assert_equal 1, response.body.count
+    assert_equal @condo.plots.count, json(response.body).count
 
   end
 
@@ -21,7 +21,6 @@ class UpdatePlots < ActionDispatch::IntegrationTest
     put "/webapp/condos/#{@condo.id}/plots/#{@plot.id}",{},create_headers
 
     assert_equal 204, response.status
-    assert_equal MeasureProcess.find(process.id).status, MeasureProcess::STATUS.second
   end
 
 end
