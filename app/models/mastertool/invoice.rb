@@ -35,7 +35,8 @@ class Invoice < ActiveRecord::Base
           })
         end
       end
-      image = self.create_consumption_image(graph_data_array)
+
+      # image = self.create_consumption_image(graph_data_array)
       #########################################################################
       invoice = self.new;
       invoice.base_consumption = 1680 #preguntar
@@ -44,13 +45,14 @@ class Invoice < ActiveRecord::Base
       invoice.due_date = process.created_at + 1.month
       invoice.fixed_price = process.fixed
       invoice.idCorrentista = meter.idCorrentista
-      invoice.image = image;
+      invoice.graph_data_array = graph_data_array;
       invoice.last_invoice_date = invoice.set_last_invoice_date(measures_for_year[-2].measure_process_id)
       invoice.meter_number = meter.number
       invoice.normal_limit = 300 #definir la funcion del limite de consumo normal
       invoice.normal_price = process.normal_price;
       invoice.plot_number = meter.plot.plot_number
       invoice.over_consumption_price = process.over_consumption_price
+
       invoice.save;
     end
 
