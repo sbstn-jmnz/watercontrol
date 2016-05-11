@@ -12,7 +12,7 @@ before_action :set_meter, only: [:show]
   end
 
     def show
-        render json: meter, status: 200,
+        render json: @meter, status: 200,
         serializer: Meters::MeterMeasuresSerializer,
         include: 'meters.measures'
     end
@@ -20,7 +20,7 @@ before_action :set_meter, only: [:show]
     private
     # Use callbacks to share common setup or constraints between actions.
     def set_meter
-      @meter = meter.find(params[:id])
+      @meter = Meter.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
