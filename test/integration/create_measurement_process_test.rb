@@ -18,14 +18,10 @@ class CreateMeasurementProcess < ActionDispatch::IntegrationTest
   test 'Debe cerrar el proceso de medicion' do
     condo = FactoryGirl::create :condo
     process = FactoryGirl::create :measure_process
-
     post "/webapp/condos/#{condo.id}/measure_processes/#{process.id}/close",{},create_headers
 
     assert_equal 204, response.status
     assert_equal MeasureProcess.find(process.id).status, MeasureProcess::STATUS.second
 
   end
-
-
-
 end

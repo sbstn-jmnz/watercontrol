@@ -13,7 +13,6 @@ module Api::Webapp
         process.closed_at = Time.now
         process.save
         Measure.close_process(process.id)
-        #Una vez cerrado
         Invoice.create_invoices(params[:id], params[:condo_id])
       end
       render json: {message: 'ok'}, status: 204
@@ -39,7 +38,6 @@ module Api::Webapp
               )
               measure.save(validate: false)
             end
-
             render json: {process_id: process.id}, status: 201, root: false
           end
         else
