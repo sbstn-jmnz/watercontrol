@@ -9,7 +9,7 @@ module Api::Webapp
       end
 
       def show
-        render json: @plot, status: 200, root: false
+        render json: @plot, status: 200, root: false, serializer: Plots::PlotSerializer
       end
 
       def update

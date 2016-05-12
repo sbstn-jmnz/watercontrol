@@ -5,7 +5,7 @@ class MeasureTest < ActiveSupport::TestCase
   setup do
     @meter =  create(:meter, number: 15, status: Meter::STATUS.first)
     @process = create(:measure_process)
-    @measure = create(:measure_from_admin, meter_id: @meter_id, value: 500, status: Measure::STATUS.third)
+    @measure = create(:measure_from_admin, meter_id: @meter.id, value: 200, status: Measure::STATUS.third)
     @user = create(:user, name:'Test Name', email: 'test@mail.com',password: 'secretpass', rut: '11.111.111-1')
   end
 
@@ -17,7 +17,7 @@ class MeasureTest < ActiveSupport::TestCase
 
   test 'asscociations on meter and user' do
     2.times { create(:measure_from_admin, value: 550, user_id: @user.id, meter_id: @meter.id) }
-    assert_equal(2, @meter.measures.count, "Unexpected meter record count")
+    assert_equal(3, @meter.measures.count, "Unexpected meter record count")
     assert_equal(2, @user.measures.count, "Unexpected user record count")
   end
 
