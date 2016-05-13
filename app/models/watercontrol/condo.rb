@@ -23,7 +23,7 @@ class Condo < ActiveRecord::Base
     owners = []
     sectors.where(condo_id: self.id).each do |sector|
       sector.plots.where(status: Plot::STATUS.first).each do |plot|
-        owners.push(plot.owner.to_json) if plot.owner
+        owners.push(plot.owner) if plot.owner
       end
     end
     return owners.uniq
