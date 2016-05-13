@@ -7,7 +7,7 @@ class UpdatePlots < ActionDispatch::IntegrationTest
     @owner = create :owner
     @condo = FactoryGirl::create :condo
     @sector = FactoryGirl::create :sector, condo_id: @condo.id
-    @plot = FactoryGirl::create :plot, sector_id: @sector.id
+    @plot = FactoryGirl::create :plot, sector_id: @sector.id, status: Plot::STATUS.first
   end
 
   test 'Debe traer lista de parcelas por condominio' do

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
        false
      end
   end
-
+  
   protected
 
   def md5_password
@@ -34,5 +34,7 @@ class User < ActiveRecord::Base
       break token unless self.class.exists?(auth_token: token)
     end
   end
+
+
 
 end

@@ -1,12 +1,6 @@
 module Api::Mobileapp
   class MeasuresController < Api::ApplicationController
 
-    def index
-      puts params.to_s
-      measures = Measure.all
-      render json: measures, status: 200, root: false
-    end
-
      def update
        ActiveRecord::Base.transaction do
          params[:measures].each do |m|

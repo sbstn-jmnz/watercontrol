@@ -52,4 +52,24 @@ class UpdateMeasuresTest < ActionDispatch::IntegrationTest
     assert_equal Measure.find(@measure2.id).status, 'ok'
   end
 
+  test 'No Debe actualizar mediciones del proceso actual y cambiar estado' do
+
+    measureHash = {
+      :measures => [{
+        id: @measure.id,
+        comment: 'Medición mes mayo',
+        value: 0,
+        },
+      {
+        id: @measure2.id,
+        comment: 'Medición mes mayo',
+        value: 0,
+      }]
+    }
+
+    put '/mobileapp/measures', measureHash.to_json, create_headers
+
+    assert_equal 422, response.status
+
+  end
 end

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
               patch 'update'
             end
           end
-          resources :sectors , only: [:show, :index]
+          resources :owners, only: [:show, :create, :update, :index]
+          resources :sectors, only: [:show, :index]
           resources :plots, only: [:show, :update, :index]
           resources :users, only: [:show, :create, :index, :update]
           put 'sectors', :controller => 'sectors', :action => 'update'
