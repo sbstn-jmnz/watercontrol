@@ -10,7 +10,7 @@ class CreateMeterTest < ActionDispatch::IntegrationTest
     @plot = create :plot, owner_id: @owner.id, sector_id: @sector.id
   end
 
-    test "Should list all owners of the condo" do
+    test "create an owner of the condo" do
        post "/webapp/condos/#{@condo.id}/owners", {
          owner:
          { idCorrentista: 2,
@@ -21,9 +21,32 @@ class CreateMeterTest < ActionDispatch::IntegrationTest
        owner = json(response.body)
        assert_equal 201, response.status
        assert_equal api_condo_owner_url(owner[:id], @condo.id), response.location
+  end
+    test "should not create an owner of the condo if not complete" do
+       post "/webapp/condos/#{@condo.id}/owners", {
+         owner:
+         { idCorrentista: 2,
+           name: 'Nombre de prueba',
+           rut: nil
+         }
+        }.to_json, create_headers
+
+       assert_equal 422, response.status
+  end
+
+    test 'should show a list of  owners from condo' do
+      get "/webapp/condos/#{@condo.id}/owners", {}, create_headers
+
+      assert_equal 200, response.status
+      refute_empty response.body
+
     end
 
-    test 'should create a owner' do
+    test "should show a owner" do
+        get "/webapp/condos/#{@condo.id}/owners/#{@owner.id}", {}, create_headers
 
+        assert_equal 200, response.status
+        owner = json(response.body)
+        assert_equal @owner.name, owner[:name]
     end
 end

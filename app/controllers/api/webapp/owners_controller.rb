@@ -18,7 +18,7 @@ module Api::Webapp
 
      def show
          render json: @owner, status: 200,
-         serializer: owners::ownerMeasuresSerializer,
+         serializer: Owners::OwnerSerializer,
          include: 'owners.measures'
      end
 
