@@ -35,6 +35,14 @@ class CreateMeasurementProcess < ActionDispatch::IntegrationTest
 
   end
 
+  test 'Should not create process is there is one active' do
+    @process = create(:measure_process)
+    post "/webapp/condos/#{@condo.id}/measure_processes",{},create_headers
+
+    assert_equal 422, response.status
+
+  end
+
   test 'should show a list of proccess from condo' do
     get "/webapp/condos/#{@condo.id}/measure_processes", {}, create_headers
 

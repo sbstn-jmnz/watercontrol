@@ -13,7 +13,7 @@ module Api::Webapp
         process.closed_at = Time.now
         process.save
         Measure.close_process(process.id)
-        Invoice.create_invoices(params[:id], params[:condo_id])
+        Invoice.create_invoices(params[:id],process_params[:condo_id])
       end
       render json: {message: 'ok'}, status: 204
     end
