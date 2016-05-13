@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :owner do
     name 'Piero Brunetti'
     rut '15.316.349-9'
+    idCorrentista '15'
   end
 
   factory :user do

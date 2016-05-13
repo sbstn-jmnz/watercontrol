@@ -7,7 +7,7 @@ class Invoice < ActiveRecord::Base
             :normal_limit, :normal_price, :over_consumption_price, numericality: true
 
   validates  :base_consumption, :current_value, :due_date, :fixed_price, :idCorrentista,
-             :image, :last_invoice_date, :last_value, :meter_number, :normal_limit, :normal_price,
+             :graph_data_array, :last_invoice_date, :last_value, :meter_number, :normal_limit, :normal_price,
              :over_consumption_price, presence: true
 
   validates :owner, presence: true
@@ -26,7 +26,7 @@ class Invoice < ActiveRecord::Base
       invoice.fixed_price = process.fixed
       invoice.idCorrentista = meter.idCorrentista
       invoice.graph_data_array = meter.graph_data_array
-      invoice.last_invoice_date = invoice.set_last_invoice_date(last_measure_process_id)
+      invoice.last_invoice_date = invoice.set_last_invoice_date(meter.last_measure_process_id)
       invoice.meter_number = meter.number
       invoice.normal_limit = meter.normal_limit
       invoice.normal_price = process.normal_price;

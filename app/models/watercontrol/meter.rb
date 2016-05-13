@@ -40,7 +40,7 @@
   end
 
   def idCorrentista
-    plot.owner.account_holder.idCorrentista
+    plot.owner.idCorrentista
   end
 
   def last_twelve_measures
@@ -50,13 +50,14 @@
   def graph_data_array
     # Returns a data array with lasts consumptions of the meter
     data_array = []
-    last_twelve_measures.each_with_index do |measure, index|
-      break if i == (measures_for_year.count - 1)
-      consumption = measures_for_year[i+1].value - measure.value
+		measures_for_year = last_twelve_measures
+    measures_for_year.each_with_index do |measure, index|
+      break if index == (measures_for_year.count - 1)
+      consumption = measures_for_year[index+1].value - measure.value
       graph_data = {
         consumption: consumption < 0 ? 0 : consumption,
-        created_at: measures_for_year[i+1].updated_at,
-        month_label: measures_for_year[i+1].updated_at.strftime("%b")
+        created_at: measures_for_year[index+1].updated_at,
+        month_label: measures_for_year[index+1].updated_at.strftime("%b")
       }
       data_array.push(graph_data)
     end

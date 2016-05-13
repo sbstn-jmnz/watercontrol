@@ -6,13 +6,16 @@ class CreateMeasurementProcess < ActionDispatch::IntegrationTest
     host! 'api.watercontrol-dev.com'
     @condo = create :condo
     @measure_process_closed = create(:measure_process, status: 'closed')
-    @process = create(:measure_process)
+    @process = create(:measure_process, status: 'closed')
     @user = create(:user)
-    @sector = create(:sector, user_id: @user.id, :condo @condo.id)
-    @plot = create(:plot, sector_id: @sector.id)
+    @owner = create (:owner)
+    @sector = create(:sector, user_id: @user.id, condo_id: @condo.id)
+    @plot = create(:plot, sector_id: @sector.id, owner_id: @owner.id)
     @meter = create(:meter, plot_id: @plot.id)
     @last_measure = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process_closed.id,
                       status: 'ok',  value: 100)
+    @last_measure2 = create(:measure, meter_id: @meter.id, user_id: @user.id, measure_process_id: @measure_process_closed.id,
+                      status: 'ok',  value: 150)
     end
 
   test 'Debe crear una medicion por cada medidor del condominio en estado pendiente' do
@@ -24,6 +27,7 @@ class CreateMeasurementProcess < ActionDispatch::IntegrationTest
   end
 
   test 'Debe cerrar el proceso de medicion' do
+    @process.status = 'active'
     post "/webapp/condos/#{@condo.id}/measure_processes/#{@process.id}/close",{},create_headers
 
     assert_equal 204, response.status
