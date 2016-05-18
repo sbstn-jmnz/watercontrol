@@ -48,6 +48,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     ansi (1.5.0)
+    api-pagination (4.3.0)
     arel (6.0.3)
     builder (3.2.2)
     byebug (8.2.4)
@@ -144,6 +145,7 @@ GEM
       mini_portile (= 0.6.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    will_paginate (3.1.0)
 
 PLATFORMS
   ruby
@@ -151,6 +153,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers!
   activerecord-sqlserver-adapter (~> 4.2.0)
+  api-pagination
   byebug
   factory_girl_rails (~> 4.0)
   minitest-reporters
@@ -163,6 +166,7 @@ DEPENDENCIES
   roo (~> 2.3.2)
   simplecov
   tiny_tds
+  will_paginate
 
 BUNDLED WITH
    1.11.2

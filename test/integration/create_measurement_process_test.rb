@@ -50,9 +50,9 @@ class CreateMeasurementProcess < ActionDispatch::IntegrationTest
     refute_empty response.body
   end
 
-  test 'should show a list of measures per proccess' do
-    get "/webapp/condos/#{@condo.id}/measure_processes/#{@proccess.id}", {}, create_headers
-
+  test 'should show a list of measures per process' do
+    get "/webapp/condos/#{@condo.id}/measure_processes/#{@measure_process_closed.id}?page=1&per_page=15", {}, create_headers
+    measures = json(response.body)
     assert_equal 200, response.status
     refute_empty response.body
   end

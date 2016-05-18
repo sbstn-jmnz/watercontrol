@@ -5,6 +5,8 @@ gem 'pg'
 gem 'rmagick'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'roo', '~> 2.3.2' #imports xls
+gem 'will_paginate' #pagination
+gem 'api-pagination'
 
 group :development, :test do
     gem "factory_girl_rails", "~> 4.0"

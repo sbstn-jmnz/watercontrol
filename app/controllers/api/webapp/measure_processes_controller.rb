@@ -45,10 +45,15 @@ module Api::Webapp
       end
     end
 
+    def show
+      measures = Measure.where(measure_process_id: params[:id])
+      paginate json: measures, per_page: params[:per_page]
+    end
+
   private
 
   def process_params
-    params.permit(:condo_id)
+    params.permit(:condo_id, :page, :per_page)
   end
 
   end

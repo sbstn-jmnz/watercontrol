@@ -16,5 +16,6 @@ class CreateMeterTest < ActionDispatch::IntegrationTest
                              }.to_json, create_headers
        meter = json(response.body)
        assert_equal api_meter_url(meter[:id]), response.location
+       assert_equal 201, response.status
     end
 end
